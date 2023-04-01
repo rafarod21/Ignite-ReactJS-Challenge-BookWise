@@ -4,7 +4,7 @@ import { ChartLineUp, Binoculars, User, SignOut } from '@phosphor-icons/react'
 import {
   NavbarButton,
   NavbarContainer,
-  NavbarContent,
+  NavbarWrapper,
   NavbarFooter,
 } from './styles'
 
@@ -17,7 +17,7 @@ export function Navbar() {
       <div>
         <Image src={logoImg} height={32} width={128} alt="BookWise Logo" />
 
-        <NavbarContent>
+        <NavbarWrapper>
           <NavbarButton href="#" isSelected>
             <ChartLineUp /> Início
           </NavbarButton>
@@ -27,7 +27,7 @@ export function Navbar() {
           <NavbarButton href="#">
             <User /> Perfil
           </NavbarButton>
-        </NavbarContent>
+        </NavbarWrapper>
       </div>
 
       <NavbarFooter>

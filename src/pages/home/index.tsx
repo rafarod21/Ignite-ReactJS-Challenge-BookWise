@@ -1,11 +1,28 @@
-import { Navbar } from '@/components/Navbar'
-import { HomeContainer, HomeContent } from './styles'
+import { ChartLineUp, MagnifyingGlass } from '@phosphor-icons/react'
+
+import {
+  HomeContainer,
+  HomeContent,
+  HomeHeader,
+  SearchBookOrAuthor,
+} from './styles'
+import Layout from '@/components/Layout'
 
 export default function Home() {
   return (
-    <HomeContainer>
-      <Navbar />
-      <HomeContent>Home content</HomeContent>
-    </HomeContainer>
+    <Layout>
+      <HomeContainer>
+        <HomeHeader>
+          <h1>
+            <ChartLineUp /> Início
+          </h1>
+          <SearchBookOrAuthor>
+            <input type="text" placeholder="Buscar livro ou autor" />
+            <MagnifyingGlass />
+          </SearchBookOrAuthor>
+        </HomeHeader>
+        <HomeContent></HomeContent>
+      </HomeContainer>
+    </Layout>
   )
 }

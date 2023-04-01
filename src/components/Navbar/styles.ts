@@ -22,7 +22,7 @@ export const NavbarContainer = styled('nav', {
   lineHeight: '160%',
 })
 
-export const NavbarContent = styled('main', {
+export const NavbarWrapper = styled('div', {
   marginTop: '4rem',
 
   display: 'flex',
