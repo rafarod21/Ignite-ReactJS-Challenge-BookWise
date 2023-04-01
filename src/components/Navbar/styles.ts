@@ -90,20 +90,7 @@ export const NavbarFooter = styled('footer', {
 
   fontSize: '$sm',
 
-  div: {
-    lineHeight: 0,
-    borderRadius: '$full',
-    overflow: 'hidden',
-    background: '$gradient-vertical',
-    padding: 1,
-  },
-
-  img: {
-    objectFit: 'cover',
-    borderRadius: '$full',
-  },
-
-  svg: {
+  '> svg': {
     fontSize: '$xl',
     color: '#F75A68',
   },

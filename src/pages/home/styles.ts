@@ -10,6 +10,7 @@ export const HomeHeader = styled('header', {
   display: 'flex',
   alignItems: 'flex-start',
   justifyContent: 'space-between',
+  marginBottom: '$10',
 
   h1: {
     display: 'flex',
@@ -62,4 +63,34 @@ export const SearchBookOrAuthor = styled('div', {
   },
 })
 
-export const HomeContent = styled('div', {})
+export const HomeContent = styled('div', {
+  display: 'grid',
+  gridTemplateColumns: '2fr 1fr',
+  gridTemplateAreas: "'last-read popular-books' 'recent-reviews popular-books'",
+  columnGap: '4rem',
+})
+
+export const HomeLastRead = styled('div', {
+  border: '1px solid red',
+  gridArea: 'last-read',
+})
+
+export const HomeRecentReviews = styled('div', {
+  gridArea: 'recent-reviews',
+
+  '> span': {
+    fontSize: '$sm',
+  },
+
+  '> div': {
+    marginTop: '$4',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '$3',
+  },
+})
+
+export const HomePopularBooks = styled('div', {
+  border: '1px solid green',
+  gridArea: 'popular-books',
+})

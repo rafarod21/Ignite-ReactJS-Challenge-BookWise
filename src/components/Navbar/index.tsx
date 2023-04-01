@@ -1,15 +1,16 @@
 import Image from 'next/image'
 import { ChartLineUp, Binoculars, User, SignOut } from '@phosphor-icons/react'
 
+import { Avatar } from '../Avatar'
+
+import logoImg from '../../assets/book-wise-logo.svg'
+
 import {
   NavbarButton,
   NavbarContainer,
   NavbarWrapper,
   NavbarFooter,
 } from './styles'
-
-import logoImg from '../../assets/book-wise-logo.svg'
-import avatarImg from '../../assets/books-img/arquitetura-limpa.png'
 
 export function Navbar() {
   return (
@@ -31,9 +32,7 @@ export function Navbar() {
       </div>
 
       <NavbarFooter>
-        <div>
-          <Image src={avatarImg} height={32} width={32} alt="Rafael" />
-        </div>
+        <Avatar size="sm" src="https://github.com/rafarod21.png" />
         <span>Rafael</span>
         <SignOut />
       </NavbarFooter>

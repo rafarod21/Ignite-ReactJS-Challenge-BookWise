@@ -1,12 +1,17 @@
 import { ChartLineUp, MagnifyingGlass } from '@phosphor-icons/react'
 
+import { Layout } from '@/components/Layout'
+import { BookCardWithUser } from '@/components/BookCardWithUser'
+
 import {
   HomeContainer,
   HomeContent,
   HomeHeader,
+  HomeLastRead,
+  HomePopularBooks,
+  HomeRecentReviews,
   SearchBookOrAuthor,
 } from './styles'
-import Layout from '@/components/Layout'
 
 export default function Home() {
   return (
@@ -21,7 +26,22 @@ export default function Home() {
             <MagnifyingGlass />
           </SearchBookOrAuthor>
         </HomeHeader>
-        <HomeContent></HomeContent>
+        <HomeContent>
+          <HomeLastRead>
+            HomeLastRead HomeLastRead HomeLastRead HomeLastRead
+          </HomeLastRead>
+          <HomeRecentReviews>
+            <span>Avalizações mais recentes</span>
+            <div>
+              <BookCardWithUser />
+              <BookCardWithUser />
+              <BookCardWithUser />
+            </div>
+          </HomeRecentReviews>
+          <HomePopularBooks>
+            HomePopularBooks HomePopularBooks HomePopularBooks HomePopularBooks
+          </HomePopularBooks>
+        </HomeContent>
       </HomeContainer>
     </Layout>
   )
