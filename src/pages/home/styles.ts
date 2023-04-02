@@ -26,43 +26,6 @@ export const HomeHeader = styled('header', {
   },
 })
 
-export const SearchBookOrAuthor = styled('div', {
-  width: '27rem',
-  border: '1px solid $gray500',
-  borderRadius: '$sm',
-  padding: '$3 $5',
-
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  gap: '$2',
-
-  transition: 'all 0.2s',
-
-  input: {
-    all: 'unset',
-    width: '100%',
-    color: '$gray200',
-
-    '&::placeholder': {
-      color: '$gray400',
-    },
-  },
-
-  svg: {
-    color: '$gray500',
-    transition: 'color 0.2s',
-  },
-
-  '&:has(input:focus)': {
-    border: '1px solid $green200',
-
-    svg: {
-      color: '$green200',
-    },
-  },
-})
-
 export const HomeContent = styled('div', {
   display: 'grid',
   gridTemplateColumns: '2fr 1fr',
@@ -70,12 +33,33 @@ export const HomeContent = styled('div', {
   columnGap: '4rem',
 })
 
-export const HomeLastRead = styled('div', {
-  border: '1px solid red',
+export const HomeLastRead = styled('section', {
   gridArea: 'last-read',
+  marginBottom: '$10',
+
+  '> div:first-child': {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginBottom: '$4',
+
+    fontSize: '$sm',
+    lineHeight: '$base',
+
+    button: {
+      all: 'unset',
+
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '$2',
+
+      color: '$purple100',
+      fontWeight: '$bold',
+    },
+  },
 })
 
-export const HomeRecentReviews = styled('div', {
+export const HomeRecentReviews = styled('section', {
   gridArea: 'recent-reviews',
 
   '> span': {
@@ -90,7 +74,41 @@ export const HomeRecentReviews = styled('div', {
   },
 })
 
-export const HomePopularBooks = styled('div', {
-  border: '1px solid green',
+export const HomePopularBooks = styled('section', {
   gridArea: 'popular-books',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  // marginLeft: '8rem',
+
+  '> div': {
+    '> div:first-child': {
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'space-between',
+      marginBottom: '$4',
+
+      fontSize: '$sm',
+      lineHeight: '$base',
+
+      button: {
+        all: 'unset',
+
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '$2',
+
+        color: '$purple100',
+        fontWeight: '$bold',
+      },
+    },
+
+    '> div:last-child': {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: '$3',
+    },
+  },
 })

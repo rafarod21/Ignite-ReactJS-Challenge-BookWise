@@ -25,8 +25,10 @@ export function BookCardWithUser() {
       <BookCardWithUserContent>
         <Image src={bookImg} height={150} width={110} alt="Nome do livro" />
         <div>
-          <h4>Arquitetura limpa</h4>
-          <span>Robert C. Martin</span>
+          <div>
+            <h4>Arquitetura limpa</h4>
+            <span>Robert C. Martin</span>
+          </div>
           <p>
             Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis.
             Penatibus id vestibulum imperdiet a at imperdiet lectus leo. Sit

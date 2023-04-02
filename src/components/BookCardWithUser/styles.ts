@@ -6,8 +6,7 @@ export const BookCardWithUserContainer = styled('div', {
   padding: '$6',
   gap: '$8',
 
-  // minWidth: 608,
-  // maxHeight: 280,
+  // maxWidth: 608,
 
   background: '$gray700',
   borderRadius: '$md',
@@ -40,15 +39,34 @@ export const BookCardWithUserContent = styled('div', {
 
   lineHeight: '$base',
 
-  h4: {
-    lineHeight: '$short',
+  img: {
+    width: '10rem',
+    height: 'auto',
   },
 
-  span: {
-    color: '$gray400',
-  },
+  '> div': {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
 
-  p: {
-    marginTop: '$5',
+    h4: {
+      lineHeight: '$short',
+    },
+
+    span: {
+      color: '$gray400',
+    },
+
+    p: {
+      marginTop: '$5',
+      fontSize: '$sm',
+      color: '$gray300',
+
+      display: '-webkit-box',
+      '-webkit-line-clamp': 4,
+      '-webkit-box-orient': 'vertical',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+    },
   },
 })

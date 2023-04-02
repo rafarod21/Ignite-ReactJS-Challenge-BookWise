@@ -1,7 +1,9 @@
-import { ChartLineUp, MagnifyingGlass } from '@phosphor-icons/react'
+import { CaretRight, ChartLineUp } from '@phosphor-icons/react'
 
 import { Layout } from '@/components/Layout'
+import { BookCardWithoutUser } from '@/components/BookCardWithoutUser'
 import { BookCardWithUser } from '@/components/BookCardWithUser'
+import { BookCard } from '@/components/BookCard'
 
 import {
   HomeContainer,
@@ -10,7 +12,6 @@ import {
   HomeLastRead,
   HomePopularBooks,
   HomeRecentReviews,
-  SearchBookOrAuthor,
 } from './styles'
 
 export default function Home() {
@@ -21,14 +22,16 @@ export default function Home() {
           <h1>
             <ChartLineUp /> Início
           </h1>
-          <SearchBookOrAuthor>
-            <input type="text" placeholder="Buscar livro ou autor" />
-            <MagnifyingGlass />
-          </SearchBookOrAuthor>
         </HomeHeader>
         <HomeContent>
           <HomeLastRead>
-            HomeLastRead HomeLastRead HomeLastRead HomeLastRead
+            <div>
+              Sua última leitura
+              <button>
+                Ver todas <CaretRight weight="bold" />
+              </button>
+            </div>
+            <BookCardWithoutUser />
           </HomeLastRead>
           <HomeRecentReviews>
             <span>Avalizações mais recentes</span>
@@ -39,7 +42,20 @@ export default function Home() {
             </div>
           </HomeRecentReviews>
           <HomePopularBooks>
-            HomePopularBooks HomePopularBooks HomePopularBooks HomePopularBooks
+            <div>
+              <div>
+                Livros populares
+                <button>
+                  Ver todos <CaretRight weight="bold" />
+                </button>
+              </div>
+              <div>
+                <BookCard />
+                <BookCard />
+                <BookCard />
+                <BookCard />
+              </div>
+            </div>
           </HomePopularBooks>
         </HomeContent>
       </HomeContainer>
