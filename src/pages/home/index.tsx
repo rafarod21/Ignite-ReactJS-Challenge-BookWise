@@ -1,4 +1,5 @@
 import { CaretRight, ChartLineUp } from '@phosphor-icons/react'
+import * as Dialog from '@radix-ui/react-dialog'
 
 import { Layout } from '@/components/Layout'
 import { BookCardWithoutUser } from '@/components/BookCardWithoutUser'
@@ -17,48 +18,50 @@ import {
 export default function Home() {
   return (
     <Layout>
-      <HomeContainer>
-        <HomeHeader>
-          <h1>
-            <ChartLineUp /> Início
-          </h1>
-        </HomeHeader>
-        <HomeContent>
-          <HomeLastRead>
-            <div>
-              Sua última leitura
-              <button>
-                Ver todas <CaretRight weight="bold" />
-              </button>
-            </div>
-            <BookCardWithoutUser />
-          </HomeLastRead>
-          <HomeRecentReviews>
-            <span>Avalizações mais recentes</span>
-            <div>
-              <BookCardWithUser />
-              <BookCardWithUser />
-              <BookCardWithUser />
-            </div>
-          </HomeRecentReviews>
-          <HomePopularBooks>
-            <div>
+      <Dialog.Root>
+        <HomeContainer>
+          <HomeHeader>
+            <h1>
+              <ChartLineUp /> Início
+            </h1>
+          </HomeHeader>
+          <HomeContent>
+            <HomeLastRead>
               <div>
-                Livros populares
+                Sua última leitura
                 <button>
-                  Ver todos <CaretRight weight="bold" />
+                  Ver todas <CaretRight weight="bold" />
                 </button>
               </div>
+              <BookCardWithoutUser />
+            </HomeLastRead>
+            <HomeRecentReviews>
+              <span>Avalizações mais recentes</span>
               <div>
-                <BookCard />
-                <BookCard />
-                <BookCard />
-                <BookCard />
+                <BookCardWithUser />
+                <BookCardWithUser />
+                <BookCardWithUser />
               </div>
-            </div>
-          </HomePopularBooks>
-        </HomeContent>
-      </HomeContainer>
+            </HomeRecentReviews>
+            <HomePopularBooks>
+              <div>
+                <div>
+                  Livros populares
+                  <button>
+                    Ver todos <CaretRight weight="bold" />
+                  </button>
+                </div>
+                <div>
+                  <BookCard />
+                  <BookCard />
+                  <BookCard />
+                  <BookCard />
+                </div>
+              </div>
+            </HomePopularBooks>
+          </HomeContent>
+        </HomeContainer>
+      </Dialog.Root>
     </Layout>
   )
 }

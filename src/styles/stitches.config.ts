@@ -14,7 +14,7 @@ export const {
 } = createStitches({
   theme: {
     fonts: {
-      default: 'Nunito, sans-serif',
+      default: 'Nunito Sans, sans-serif',
     },
 
     space: {

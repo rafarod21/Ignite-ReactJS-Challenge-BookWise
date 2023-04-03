@@ -3,11 +3,12 @@ import { RatingStarsContainer } from './styles'
 
 interface RatingStarsProps {
   rating: 0 | 1 | 2 | 3 | 4 | 5
+  size?: 'sm' | 'md' | 'lg'
 }
 
-export function RatingStars({ rating }: RatingStarsProps) {
+export function RatingStars({ rating, size = 'sm' }: RatingStarsProps) {
   return (
-    <RatingStarsContainer>
+    <RatingStarsContainer size={size}>
       <Star weight={rating >= 1 ? 'fill' : 'regular'} />
       <Star weight={rating >= 2 ? 'fill' : 'regular'} />
       <Star weight={rating >= 3 ? 'fill' : 'regular'} />

@@ -20,6 +20,8 @@ export const NavbarContainer = styled('nav', {
   padding: '$10 $1 $6',
 
   lineHeight: '160%',
+
+  '@media (max-width: 480px)': {},
 })
 
 export const NavbarWrapper = styled('div', {

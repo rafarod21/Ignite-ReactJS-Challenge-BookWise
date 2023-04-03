@@ -10,8 +10,6 @@ export const BookCardWithUserContainer = styled('div', {
 
   background: '$gray700',
   borderRadius: '$md',
-
-  position: 'relative',
 })
 
 export const BookCardWithUserHeader = styled('header', {
