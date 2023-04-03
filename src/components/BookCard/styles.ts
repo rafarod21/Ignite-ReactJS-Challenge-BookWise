@@ -9,6 +9,11 @@ export const BookCardContainer = styled('div', {
 
   background: '$gray700',
   borderRadius: '$md',
+  border: '2px solid $gray700',
+
+  '&:hover': {
+    border: '2px solid $gray600',
+  },
 
   '> div': {
     display: 'flex',

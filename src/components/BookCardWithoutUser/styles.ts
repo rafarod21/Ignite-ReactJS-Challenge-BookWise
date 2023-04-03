@@ -8,10 +8,15 @@ export const BookCardWithoutUserContainer = styled('div', {
   // maxWidth: 608,
   // maxHeight: 280,
 
+  position: 'relative',
+
   background: '$gray600',
   borderRadius: '$md',
+  border: '2px solid $gray600',
 
-  position: 'relative',
+  '&:hover': {
+    border: '2px solid $gray500',
+  },
 
   img: {
     width: '10rem',

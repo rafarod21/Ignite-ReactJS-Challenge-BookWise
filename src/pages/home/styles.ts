@@ -46,15 +46,20 @@ export const HomeLastRead = styled('section', {
     lineHeight: '$base',
 
     button: {
-      all: 'unset',
-
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      padding: '$1 $2',
       gap: '$2',
 
       color: '$purple100',
       fontWeight: '$bold',
+      background: 'transparent',
+
+      '&:hover': {
+        background: 'rgba(131, 129, 217, 0.06)',
+        borderRadius: '$sm',
+      },
     },
   },
 })
@@ -81,6 +86,10 @@ export const HomePopularBooks = styled('section', {
   alignItems: 'center',
   // marginLeft: '8rem',
 
+  position: 'sticky',
+  top: '$5',
+  alignSelf: 'start',
+
   '> div': {
     '> div:first-child': {
       width: '100%',
@@ -92,15 +101,20 @@ export const HomePopularBooks = styled('section', {
       lineHeight: '$base',
 
       button: {
-        all: 'unset',
-
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        padding: '$1 $2',
         gap: '$2',
 
         color: '$purple100',
         fontWeight: '$bold',
+        background: 'transparent',
+
+        '&:hover': {
+          background: 'rgba(131, 129, 217, 0.06)',
+          borderRadius: '$sm',
+        },
       },
     },
 

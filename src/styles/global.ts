@@ -18,4 +18,9 @@ export const globalStyles = globalCss({
     fontFamily: '$default',
     fontWeight: 400,
   },
+
+  button: {
+    all: 'unset',
+    cursor: 'pointer',
+  },
 })

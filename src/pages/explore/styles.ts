@@ -63,4 +63,52 @@ export const SearchBookOrAuthor = styled('div', {
   },
 })
 
-export const ExploreContent = styled('div', {})
+export const BooksTags = styled('div', {
+  width: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  gap: '$3',
+  marginBottom: '3.25rem',
+})
+
+export const Tag = styled('button', {
+  border: '1px solid $purple100',
+  borderRadius: '$full',
+  padding: '$1 $4',
+
+  transition: 'all 0.2s',
+
+  '&:hover': {
+    background: '$purple200',
+    border: '1px solid $purple100',
+    color: '$gray100',
+  },
+
+  variants: {
+    selected: {
+      true: {
+        background: '$purple200',
+        border: '1px solid $purple200',
+        color: '$gray100',
+      },
+      false: {
+        background: 'transparent',
+        color: '$purple100',
+      },
+    },
+  },
+
+  defaultVariants: {
+    selected: 'false',
+  },
+})
+
+export const BooksList = styled('div', {
+  width: '100%',
+  display: 'grid',
+  // gridTemplateColumns: '1fr 1fr 1fr 1fr',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+  placeItems: 'center',
+
+  gap: '$5',
+})

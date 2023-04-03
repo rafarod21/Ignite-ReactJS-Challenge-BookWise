@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import * as Dialog from '@radix-ui/react-dialog'
 
 import { Navbar } from '../Navbar'
 
@@ -14,7 +15,9 @@ export function Layout({ children }: LayoutProps) {
       <div>
         <Navbar />
       </div>
-      <main>{children}</main>
+      <main>
+        <Dialog.Root>{children}</Dialog.Root>
+      </main>
     </LayoutContainer>
   )
 }
