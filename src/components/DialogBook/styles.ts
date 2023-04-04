@@ -158,6 +158,94 @@ export const BookComment = styled('section', {
   },
 })
 
+export const CardNewComment = styled('div', {
+  padding: '$6',
+  background: '$gray700',
+  borderRadius: '$md',
+
+  header: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+
+    '> div:first-child': {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '$4',
+    },
+  },
+
+  '> div': {
+    width: '100%',
+    height: '10.25rem',
+    margin: '$6 0 $3',
+
+    background: '$gray800',
+    border: '1px solid $gray500',
+    borderRadius: '$sm',
+    padding: '$3 $5 $6 $5',
+
+    position: 'relative',
+
+    textarea: {
+      all: 'unset',
+
+      width: '100%',
+      height: '100%',
+      resize: 'none',
+
+      fontSize: '$sm',
+      color: '$gray200',
+
+      '&::placeholder': {
+        color: '$gray400',
+      },
+
+      '&::-webkit-scrollbar': {
+        display: 'none',
+      },
+    },
+
+    span: {
+      position: 'absolute',
+      right: '$1',
+      bottom: 0,
+
+      color: '$gray400',
+      fontSize: '$xs',
+    },
+  },
+
+  footer: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    gap: '$2',
+
+    button: {
+      padding: '$2',
+      background: '$gray600',
+      borderRadius: '$sm',
+
+      fontWeight: '$bold',
+      lineHeight: 0,
+
+      '&:first-child': {
+        color: '$purple100',
+      },
+
+      '&:last-child': {
+        color: '$green100',
+      },
+
+      transition: 'background 0.2s',
+
+      '&:hover': {
+        background: '$gray500',
+      },
+    },
+  },
+})
+
 export const CardComment = styled('div', {
   padding: '$6',
   background: '$gray700',

@@ -14,6 +14,18 @@ export const globalStyles = globalCss({
     lineHeight: '$base',
   },
 
+  '@media (max-width: 1000px)': {
+    html: {
+      fontSize: '93.75%',
+    },
+  },
+
+  '@media (max-width: 720px)': {
+    html: {
+      fontSize: '87.5%',
+    },
+  },
+
   'body, input, textarea, button': {
     // fontFamily: '$default',
     fontWeight: 400,

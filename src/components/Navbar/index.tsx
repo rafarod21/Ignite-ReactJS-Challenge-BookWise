@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { ChartLineUp, Binoculars, User, SignOut } from '@phosphor-icons/react'
 
@@ -13,19 +14,27 @@ import {
 } from './styles'
 
 export function Navbar() {
+  const router = useRouter()
+
   return (
     <NavbarContainer>
       <div>
         <Image src={logoImg} height={32} width={128} alt="BookWise Logo" />
 
         <NavbarWrapper>
-          <NavbarButton href="#" isSelected>
+          <NavbarButton href="/" isSelected={router.asPath === '/'}>
             <ChartLineUp /> Início
           </NavbarButton>
-          <NavbarButton href="#">
+          <NavbarButton
+            href="/explore"
+            isSelected={router.asPath.startsWith('/explore')}
+          >
             <Binoculars /> Explorar
           </NavbarButton>
-          <NavbarButton href="#">
+          <NavbarButton
+            href="/profile"
+            isSelected={router.asPath.startsWith('/profile')}
+          >
             <User /> Perfil
           </NavbarButton>
         </NavbarWrapper>

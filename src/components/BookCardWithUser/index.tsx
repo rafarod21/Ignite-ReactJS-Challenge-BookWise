@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { Avatar } from '../Avatar'
 import { RatingStars } from '../RatingStars'
 
-import bookImg from '../../assets/books-img/arquitetura-limpa.png'
+import { Book } from '@/@types/Book'
 
 import {
   BookCardWithUserContainer,
@@ -11,7 +11,11 @@ import {
   BookCardWithUserHeader,
 } from './styles'
 
-export function BookCardWithUser() {
+interface BookCardWithUserProps {
+  book: Book
+}
+
+export function BookCardWithUser({ book }: BookCardWithUserProps) {
   return (
     <BookCardWithUserContainer>
       <BookCardWithUserHeader>
@@ -23,17 +27,18 @@ export function BookCardWithUser() {
         <RatingStars rating={4} />
       </BookCardWithUserHeader>
       <BookCardWithUserContent>
-        <Image src={bookImg} height={150} width={110} alt="Nome do livro" />
+        <Image
+          src={book.cover_url}
+          height={150}
+          width={110}
+          alt="Nome do livro"
+        />
         <div>
           <div>
-            <h4>Arquitetura limpa</h4>
-            <span>Robert C. Martin</span>
+            <h4>{book.name}</h4>
+            <span>{book.author}</span>
           </div>
-          <p>
-            Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis.
-            Penatibus id vestibulum imperdiet a at imperdiet lectus leo. Sit
-            porta eget nec vitae sit vulputate eget
-          </p>
+          <p>{book.summary}</p>
         </div>
       </BookCardWithUserContent>
     </BookCardWithUserContainer>

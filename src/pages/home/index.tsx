@@ -5,6 +5,9 @@ import { Layout } from '@/components/Layout'
 import { BookCardWithoutUser } from '@/components/BookCardWithoutUser'
 import { BookCardWithUser } from '@/components/BookCardWithUser'
 import { BookCard } from '@/components/BookCard'
+import { DialogBook } from '@/components/DialogBook'
+
+import { Book } from '@/@types/Book'
 
 import {
   HomeContainer,
@@ -14,6 +17,27 @@ import {
   HomePopularBooks,
   HomeRecentReviews,
 } from './styles'
+
+const BOOK: Book = {
+  id: 'c8176d86-896a-4c21-9219-6bb28cccaa5f',
+  name: '14 Hábitos de Desenvolvedores Altamente Produtivos',
+  author: 'Zeno Rocha',
+  summary:
+    'Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis. Penatibus id vestibulum imperdiet a at imperdiet lectus leo. Sit porta eget nec vitae sit vulputate eget',
+  cover_url:
+    '/images/books/14-habitos-de-desenvolvedores-altamente-produtivos.png',
+  total_pages: 160,
+  categories: [
+    {
+      name: 'Educação',
+      id: 'f1a50507-0aa7-4245-8a5c-0d0de14e9d6d',
+    },
+    {
+      name: 'Programação',
+      id: 'c9f22067-4978-4a24-84a1-7d37f343dfc2',
+    },
+  ],
+}
 
 export default function Home() {
   return (
@@ -33,14 +57,14 @@ export default function Home() {
                   Ver todas <CaretRight weight="bold" />
                 </button>
               </div>
-              <BookCardWithoutUser />
+              <BookCardWithoutUser book={BOOK} />
             </HomeLastRead>
             <HomeRecentReviews>
               <span>Avalizações mais recentes</span>
               <div>
-                <BookCardWithUser />
-                <BookCardWithUser />
-                <BookCardWithUser />
+                <BookCardWithUser book={BOOK} />
+                <BookCardWithUser book={BOOK} />
+                <BookCardWithUser book={BOOK} />
               </div>
             </HomeRecentReviews>
             <HomePopularBooks>
@@ -52,15 +76,17 @@ export default function Home() {
                   </button>
                 </div>
                 <div>
-                  <BookCard />
-                  <BookCard />
-                  <BookCard />
-                  <BookCard />
+                  <BookCard book={BOOK} />
+                  <BookCard book={BOOK} />
+                  <BookCard book={BOOK} />
+                  <BookCard book={BOOK} />
                 </div>
               </div>
             </HomePopularBooks>
           </HomeContent>
         </HomeContainer>
+
+        <DialogBook book={BOOK} />
       </Dialog.Root>
     </Layout>
   )

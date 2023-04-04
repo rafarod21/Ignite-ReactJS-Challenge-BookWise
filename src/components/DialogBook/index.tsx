@@ -1,4 +1,5 @@
-import { BookmarkSimple, BookOpen, X } from '@phosphor-icons/react'
+import React from 'react'
+import { BookmarkSimple, BookOpen, Check, X } from '@phosphor-icons/react'
 import * as Dialog from '@radix-ui/react-dialog'
 import Image from 'next/image'
 
@@ -6,7 +7,7 @@ import { DialogLogin } from '../DialogLogin'
 import { RatingStars } from '../RatingStars'
 import { Avatar } from '../Avatar'
 
-import bookImg from '../../assets/books-img/arquitetura-limpa.png'
+import { Book } from '@/@types/Book'
 
 import {
   BookAbout,
@@ -15,12 +16,17 @@ import {
   BookInfo,
   CardComment,
   CardCommentHeader,
+  CardNewComment,
   DialogClose,
   DialogContent,
   DialogOverlay,
 } from './styles'
 
-export function DialogBook() {
+interface DialogBookProps {
+  book: Book
+}
+
+export function DialogBook({ book }: DialogBookProps) {
   return (
     <Dialog.Portal>
       <DialogOverlay />
@@ -31,11 +37,16 @@ export function DialogBook() {
 
         <BookDetail>
           <div>
-            <Image src={bookImg} height={242} width={172} alt="Nome do livro" />
+            <Image
+              src={book.cover_url}
+              height={242}
+              width={172}
+              alt="Nome do livro"
+            />
             <BookInfo>
               <div>
-                <h4>Arquitetura limpa</h4>
-                <span>Robert C. Martin</span>
+                <h4>{book.name}</h4>
+                <span>{book.author}</span>
               </div>
               <div>
                 <RatingStars rating={4} size="md" />
@@ -48,14 +59,22 @@ export function DialogBook() {
               <BookmarkSimple />
               <div>
                 <span>Categoria</span>
-                <strong>Computação, educação</strong>
+                <strong>
+                  {book.categories.map((category, index) => (
+                    <React.Fragment key={category.id}>
+                      {index === book.categories.length - 1
+                        ? category.name
+                        : `${category.name}, `}
+                    </React.Fragment>
+                  ))}
+                </strong>
               </div>
             </div>
             <div>
               <BookOpen />
               <div>
                 <span>Páginas</span>
-                <strong>160</strong>
+                <strong>{book.total_pages}</strong>
               </div>
             </div>
           </BookAbout>
@@ -64,9 +83,36 @@ export function DialogBook() {
         <BookComment>
           <div>
             Avaliações
-            <button>Avaliar</button>
+            <Dialog.Root>
+              <Dialog.Trigger asChild>
+                <button>Avaliar</button>
+              </Dialog.Trigger>
+
+              <DialogLogin />
+            </Dialog.Root>
           </div>
           <div>
+            <CardNewComment>
+              <header>
+                <div>
+                  <Avatar src="https://github.com/rafarod21.png" size="md" />
+                  Rafael
+                </div>
+                <RatingStars rating={4} size="lg" />
+              </header>
+              <div>
+                <textarea maxLength={450} placeholder="Escreva sua avaliação" />
+                <span>{'0/450'}</span>
+              </div>
+              <footer>
+                <button>
+                  <X weight="bold" />
+                </button>
+                <button>
+                  <Check weight="bold" />
+                </button>
+              </footer>
+            </CardNewComment>
             <CardComment>
               <CardCommentHeader>
                 <div>
@@ -137,12 +183,6 @@ export function DialogBook() {
             </CardComment>
           </div>
         </BookComment>
-
-        {/* <Dialog.Root>
-          <Dialog.Trigger>abrir modal login</Dialog.Trigger>
-
-          <DialogLogin />
-        </Dialog.Root> */}
       </DialogContent>
     </Dialog.Portal>
   )
