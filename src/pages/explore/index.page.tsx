@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Binoculars, MagnifyingGlass } from '@phosphor-icons/react'
 import * as Dialog from '@radix-ui/react-dialog'
 
@@ -6,7 +7,8 @@ import { DialogBook } from '@/components/DialogBook'
 import { BookCard } from '@/components/BookCard'
 
 import { Book } from '@/@types/Book'
-import { CategoryName } from '@/@types/Category'
+import { tags } from '@/@types/Tags'
+import { Tag } from '@/@types/Category'
 
 import {
   ExploreContainer,
@@ -14,7 +16,7 @@ import {
   ExploreHeader,
   SearchBookOrAuthor,
   BooksTags,
-  Tag,
+  Tag as TagComponent,
 } from './styles'
 
 const BOOK: Book = {
@@ -38,9 +40,21 @@ const BOOK: Book = {
   ],
 }
 
-const BOOK_TAGS: CategoryName = []
-
 export default function Explore() {
+  const [selectedTags, setSelectedTags] = useState<Tag[]>([])
+
+  function handleToogleSelectedTag(tag: Tag) {
+    if (selectedTags.includes(tag)) {
+      setSelectedTags((prevState) => {
+        return prevState.filter((item) => item !== tag)
+      })
+    } else {
+      setSelectedTags((prevState) => {
+        return [...prevState, tag]
+      })
+    }
+  }
+
   return (
     <Layout>
       <Dialog.Root>
@@ -55,14 +69,21 @@ export default function Explore() {
             </SearchBookOrAuthor>
           </ExploreHeader>
           <BooksTags>
-            <Tag selected>Tudo</Tag>
-            <Tag>Computação</Tag>
-            <Tag>Educação</Tag>
-            <Tag>Fantasia</Tag>
-            <Tag>Ficção científica</Tag>
-            <Tag>Horror</Tag>
-            <Tag>HQs</Tag>
-            <Tag>Suspense</Tag>
+            <TagComponent
+              onClick={() => setSelectedTags([])}
+              selected={selectedTags.length === 0}
+            >
+              Tudo
+            </TagComponent>
+            {tags.map((tag) => (
+              <TagComponent
+                key="tag"
+                onClick={() => handleToogleSelectedTag(tag)}
+                selected={selectedTags.includes(tag)}
+              >
+                {tag}
+              </TagComponent>
+            ))}
           </BooksTags>
           <BooksList>
             <BookCard book={BOOK} />

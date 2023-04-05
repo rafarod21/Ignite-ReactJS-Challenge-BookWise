@@ -1,6 +1,8 @@
-export type CategoryName = 'Programação' | 'Educação' | 'Ficção' | 'Aventura' | 'Geek' | 'Alegoria' | 'Fábula' | 'Romance' | 'Suspense' | 'Autoajuda' | 'Arquitetura' | 'Terror'
+import { tags } from "./Tags";
+
+export type Tag = typeof tags[number];
 
 export interface Category {
   id: string;
-  name: CategoryName;
+  name: Tag;
 }

@@ -24,6 +24,11 @@ export const ExploreHeader = styled('header', {
       color: '$green100',
     },
   },
+
+  '@bpmd': {
+    flexDirection: 'column',
+    gap: '$5',
+  },
 })
 
 export const SearchBookOrAuthor = styled('div', {
@@ -61,6 +66,10 @@ export const SearchBookOrAuthor = styled('div', {
       color: '$green200',
     },
   },
+
+  '@bpmd': {
+    width: '100%',
+  },
 })
 
 export const BooksTags = styled('div', {
@@ -69,6 +78,12 @@ export const BooksTags = styled('div', {
   alignItems: 'center',
   gap: '$3',
   marginBottom: '3.25rem',
+
+  flexWrap: 'wrap',
+
+  '@bpmd': {
+    justifyContent: 'center',
+  },
 })
 
 export const Tag = styled('button', {
