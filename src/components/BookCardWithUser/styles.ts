@@ -10,6 +10,24 @@ export const BookCardWithUserContainer = styled('div', {
 
   background: '$gray700',
   borderRadius: '$md',
+
+  '> p': {
+    display: 'none',
+    fontSize: '$sm',
+    color: '$gray300',
+
+    // display: '-webkit-box',
+    '-webkit-line-clamp': 4,
+    '-webkit-box-orient': 'vertical',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  },
+
+  '@bpmd': {
+    '> p': {
+      display: '-webkit-box',
+    },
+  },
 })
 
 export const BookCardWithUserHeader = styled('header', {
@@ -65,6 +83,12 @@ export const BookCardWithUserContent = styled('div', {
       '-webkit-box-orient': 'vertical',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
+    },
+
+    '@bpmd': {
+      p: {
+        display: 'none',
+      },
     },
   },
 })

@@ -20,8 +20,6 @@ export const NavbarContainer = styled('nav', {
   padding: '$10 $1 $6',
 
   lineHeight: '160%',
-
-  '@media (max-width: 480px)': {},
 })
 
 export const NavbarWrapper = styled('div', {
@@ -86,14 +84,40 @@ export const NavbarButton = styled(Link, {
 })
 
 export const NavbarFooter = styled('footer', {
-  display: 'flex',
-  alignItems: 'center',
-  gap: '$3',
+  variants: {
+    isLogged: {
+      true: {
+        button: {
+          display: 'flex',
+          alignItems: 'center',
+          gap: '$3',
 
-  fontSize: '$sm',
+          fontSize: '$sm',
 
-  '> svg': {
-    fontSize: '$xl',
-    color: '#F75A68',
+          '> svg': {
+            fontSize: '$xl',
+            color: '#F75A68',
+          },
+        },
+      },
+      false: {
+        button: {
+          display: 'flex',
+          alignItems: 'center',
+          gap: '$3',
+
+          fontSize: '$md',
+
+          '> svg': {
+            fontSize: '$xl',
+            color: '$green100',
+          },
+        },
+      },
+    },
+  },
+
+  defaultVariants: {
+    isLogged: 'false',
   },
 })

@@ -31,6 +31,12 @@ export const HomeContent = styled('div', {
   gridTemplateColumns: '2fr 1fr',
   gridTemplateAreas: "'last-read popular-books' 'recent-reviews popular-books'",
   columnGap: '4rem',
+  paddingBottom: '$10',
+
+  '@bpmd': {
+    gridTemplateColumns: '1fr',
+    gridTemplateAreas: "'last-read' 'popular-books' 'recent-reviews'",
+  },
 })
 
 export const HomeLastRead = styled('section', {
@@ -123,6 +129,16 @@ export const HomePopularBooks = styled('section', {
       flexDirection: 'column',
       alignItems: 'center',
       gap: '$3',
+    },
+  },
+
+  '@bpmd': {
+    position: 'relative',
+    top: 0,
+    marginBottom: '$10',
+
+    '> div': {
+      width: '100%',
     },
   },
 })

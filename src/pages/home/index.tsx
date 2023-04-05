@@ -2,7 +2,7 @@ import { CaretRight, ChartLineUp } from '@phosphor-icons/react'
 import * as Dialog from '@radix-ui/react-dialog'
 
 import { Layout } from '@/components/Layout'
-import { BookCardWithoutUser } from '@/components/BookCardWithoutUser'
+import { BookCardLastReading } from '@/components/BookCardLastReading'
 import { BookCardWithUser } from '@/components/BookCardWithUser'
 import { BookCard } from '@/components/BookCard'
 import { DialogBook } from '@/components/DialogBook'
@@ -57,7 +57,7 @@ export default function Home() {
                   Ver todas <CaretRight weight="bold" />
                 </button>
               </div>
-              <BookCardWithoutUser book={BOOK} />
+              <BookCardLastReading book={BOOK} />
             </HomeLastRead>
             <HomeRecentReviews>
               <span>Avalizações mais recentes</span>

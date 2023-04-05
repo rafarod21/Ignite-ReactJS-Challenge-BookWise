@@ -84,4 +84,9 @@ export const {
       full: '99999px',
     },
   },
+  media: {
+    bpsm: '(max-width: 440px)',
+    bpmd: '(max-width: 720px)',
+    bplg: '(max-width: 1000px)',
+  },
 })

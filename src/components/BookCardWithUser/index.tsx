@@ -41,6 +41,7 @@ export function BookCardWithUser({ book }: BookCardWithUserProps) {
           <p>{book.summary}</p>
         </div>
       </BookCardWithUserContent>
+      <p>{book.summary}</p>
     </BookCardWithUserContainer>
   )
 }

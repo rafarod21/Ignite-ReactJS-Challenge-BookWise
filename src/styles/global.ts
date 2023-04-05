@@ -14,15 +14,21 @@ export const globalStyles = globalCss({
     lineHeight: '$base',
   },
 
-  '@media (max-width: 1000px)': {
+  '@bplg': {
     html: {
       fontSize: '93.75%',
     },
   },
 
-  '@media (max-width: 720px)': {
+  '@bpmd': {
     html: {
       fontSize: '87.5%',
+    },
+  },
+
+  '@bpsm': {
+    html: {
+      fontSize: '81.25%',
     },
   },
 

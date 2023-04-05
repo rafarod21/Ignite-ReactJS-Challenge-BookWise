@@ -14,13 +14,21 @@ export const LayoutContainer = styled('div', {
 
     position: 'sticky',
     top: 0,
+
+    '@bpmd': {
+      display: 'none',
+    },
+
+    '@bpsm': {},
   },
 
   '> main': {
     width: '100%',
 
     padding: '4.5rem 6rem 0',
-  },
 
-  '@media (max-width: 1000px)': {},
+    '@bpmd': {
+      padding: '$5',
+    },
+  },
 })

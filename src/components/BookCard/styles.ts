@@ -29,6 +29,7 @@ export const BookCardContainer = styled('div', {
     hasSummary: {
       false: {
         maxWidth: 324,
+        // width: '100%',
       },
       true: {
         width: 'auto',
