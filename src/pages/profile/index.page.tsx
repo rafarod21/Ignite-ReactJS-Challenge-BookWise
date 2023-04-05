@@ -1,7 +1,15 @@
-import { MagnifyingGlass, User } from '@phosphor-icons/react'
+import {
+  BookmarkSimple,
+  BookOpen,
+  Books,
+  MagnifyingGlass,
+  User,
+  UserList,
+} from '@phosphor-icons/react'
 import * as Dialog from '@radix-ui/react-dialog'
 
 import { Layout } from '@/components/Layout'
+import { Avatar } from '@/components/Avatar'
 import { BookCard } from '@/components/BookCard'
 
 import { Book } from '@/@types/Book'
@@ -10,9 +18,10 @@ import {
   BooksList,
   ProfileContainer,
   ProfileContent,
-  ProfileDetails,
+  UserDetails,
   ProfileHeader,
   SearchBook,
+  HowLongBlock,
 } from './styles'
 
 const BOOK: Book = {
@@ -39,27 +48,74 @@ const BOOK: Book = {
 export default function Profile() {
   return (
     <Layout>
-      <ProfileContainer>
-        <ProfileHeader>
-          <h1>
-            <User /> Perfil
-          </h1>
-        </ProfileHeader>
-        <ProfileContent>
-          <BooksList>
-            <SearchBook>
-              <input type="text" placeholder="Buscar livro avaliado" />
-              <MagnifyingGlass />
-            </SearchBook>
-            <div>
-              <Dialog.Root>
+      <Dialog.Root>
+        <ProfileContainer>
+          <ProfileHeader>
+            <h1>
+              <User /> Perfil
+            </h1>
+          </ProfileHeader>
+          <ProfileContent>
+            <BooksList>
+              <SearchBook>
+                <input type="text" placeholder="Buscar livro avaliado" />
+                <MagnifyingGlass />
+              </SearchBook>
+              <HowLongBlock>
+                <span>Há 2 dias</span>
                 <BookCard book={BOOK} hasSummary />
-              </Dialog.Root>
-            </div>
-          </BooksList>
-          <ProfileDetails></ProfileDetails>
-        </ProfileContent>
-      </ProfileContainer>
+                <BookCard book={BOOK} hasSummary />
+              </HowLongBlock>
+              <HowLongBlock>
+                <span>Há 4 meses</span>
+                <BookCard book={BOOK} hasSummary />
+                <BookCard book={BOOK} hasSummary />
+              </HowLongBlock>
+            </BooksList>
+            <UserDetails>
+              <header>
+                <Avatar size="lg" src="https://github.com/rafarod21.png" />
+                <h2>Rafael Rodrigues</h2>
+                <span>membro desde 2019</span>
+              </header>
+              <div />
+              <div>
+                <div>
+                  <BookOpen />
+                  <div>
+                    <strong>3853</strong>
+                    <span>Páginas lidas</span>
+                  </div>
+                </div>
+
+                <div>
+                  <Books />
+                  <div>
+                    <strong>10</strong>
+                    <span>Livros avaliados</span>
+                  </div>
+                </div>
+
+                <div>
+                  <UserList />
+                  <div>
+                    <strong>8</strong>
+                    <span>Autores lidos</span>
+                  </div>
+                </div>
+
+                <div>
+                  <BookmarkSimple />
+                  <div>
+                    <strong>Computação</strong>
+                    <span>Categoria mais lida</span>
+                  </div>
+                </div>
+              </div>
+            </UserDetails>
+          </ProfileContent>
+        </ProfileContainer>
+      </Dialog.Root>
     </Layout>
   )
 }

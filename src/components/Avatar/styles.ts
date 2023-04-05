@@ -1,19 +1,6 @@
 import * as Avatar from '@radix-ui/react-avatar'
 import { styled } from '@/styles/stitches.config'
 
-// export const AvatarContainer = styled('div', {
-//   lineHeight: 0,
-//   borderRadius: '$full',
-//   overflow: 'hidden',
-//   background: '$gradient-vertical',
-//   padding: 1,
-
-//   img: {
-//     objectFit: 'cover',
-//     borderRadius: '$full',
-//   },
-// })
-
 export const AvatarContainer = styled(Avatar.Root, {
   lineHeight: 0,
   borderRadius: '$full',
@@ -34,6 +21,7 @@ export const AvatarContainer = styled(Avatar.Root, {
       lg: {
         width: '4.5rem',
         height: '4.5rem',
+        padding: 2,
       },
     },
   },

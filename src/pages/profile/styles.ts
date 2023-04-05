@@ -28,18 +28,22 @@ export const ProfileHeader = styled('header', {
 
 export const ProfileContent = styled('div', {
   display: 'grid',
-  gridTemplateColumns: '2fr 1fr',
-  gridTemplateAreas: "'last-read popular-books' 'recent-reviews popular-books'",
-  columnGap: '4rem',
+  gridTemplateColumns: '3fr 1fr',
+  columnGap: '6rem',
+
+  paddingBottom: '$10',
 })
 
-export const BooksList = styled('section', {})
+export const BooksList = styled('section', {
+  width: '100%',
+})
 
 export const SearchBook = styled('div', {
-  width: '27rem',
+  width: '100%',
   border: '1px solid $gray500',
   borderRadius: '$sm',
   padding: '$3 $5',
+  marginBottom: '$8',
 
   display: 'flex',
   alignItems: 'center',
@@ -72,4 +76,87 @@ export const SearchBook = styled('div', {
   },
 })
 
-export const ProfileDetails = styled('section', {})
+export const HowLongBlock = styled('div', {
+  width: '100%',
+
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '$2',
+
+  '> span': {
+    fontSize: '$sm',
+    color: '$gray300',
+  },
+
+  '& + &': {
+    marginTop: '$6',
+  },
+})
+
+export const UserDetails = styled('section', {
+  borderLeft: '2px solid $gray700',
+
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: '$8',
+
+  maxHeight: 555,
+
+  header: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+
+    h2: {
+      fontSize: '$xl',
+      marginTop: '$5',
+    },
+
+    span: {
+      fontSize: '$sm',
+      color: '$gray400',
+    },
+  },
+
+  '> div:nth-of-type(1)': {
+    background: '$gradient-horizontal',
+    height: 4,
+    width: '8%',
+    borderRadius: '$full',
+    marginBottom: '$2',
+  },
+
+  '> div:last-child': {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '$10',
+
+    '> div': {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '$4',
+
+      svg: {
+        width: '2rem',
+        height: '2rem',
+        color: '$green100',
+      },
+
+      div: {
+        display: 'flex',
+        flexDirection: 'column',
+      },
+
+      span: {
+        fontSize: '$sm',
+        color: '$gray300',
+      },
+
+      strong: {
+        lineHeight: '$short',
+        fontSize: '$md',
+      },
+    },
+  },
+})

@@ -31,7 +31,8 @@ export const BookCardContainer = styled('div', {
         maxWidth: 324,
       },
       true: {
-        maxWidth: 624,
+        width: 'auto',
+        // maxWidth: 624,
       },
     },
   },
