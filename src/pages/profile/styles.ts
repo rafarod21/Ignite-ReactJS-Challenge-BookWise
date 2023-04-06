@@ -32,6 +32,11 @@ export const ProfileContent = styled('div', {
   columnGap: '6rem',
 
   paddingBottom: '$10',
+
+  '@bpmd': {
+    display: 'flex',
+    flexDirection: 'column-reverse',
+  },
 })
 
 export const BooksList = styled('section', {
@@ -157,6 +162,17 @@ export const UserDetails = styled('section', {
         lineHeight: '$short',
         fontSize: '$md',
       },
+    },
+  },
+
+  '@bpmd': {
+    borderLeft: 0,
+    marginBottom: '$8',
+
+    '> div:last-child': {
+      justifyContent: 'center',
+      flexDirection: 'unset',
+      flexWrap: 'wrap',
     },
   },
 })

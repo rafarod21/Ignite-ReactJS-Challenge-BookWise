@@ -20,6 +20,10 @@ export const NavbarContainer = styled('nav', {
   padding: '$10 $1 $6',
 
   lineHeight: '160%',
+
+  '@bplg': {
+    width: '12.5rem',
+  },
 })
 
 export const NavbarWrapper = styled('div', {
@@ -33,14 +37,16 @@ export const NavbarWrapper = styled('div', {
 export const NavbarButton = styled(Link, {
   all: 'unset',
   position: 'relative',
+  width: '100%',
 
   display: 'flex',
   alignItems: 'center',
   padding: '$2 0',
   gap: '$3',
-  cursor: 'pointer',
 
   fontSize: '$md',
+
+  cursor: 'pointer',
 
   transition: 'color 0.2s',
 
@@ -50,6 +56,10 @@ export const NavbarButton = styled(Link, {
 
   svg: {
     fontSize: '$2xl',
+  },
+
+  '@bplg': {
+    marginLeft: '1.5rem',
   },
 
   variants: {

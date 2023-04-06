@@ -27,7 +27,7 @@ export const LayoutContainer = styled('div', {
 
     padding: '4.5rem 6rem 0',
 
-    '@bpmd': {
+    '@bplg': {
       padding: '$5',
     },
   },

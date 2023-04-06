@@ -77,7 +77,7 @@ export default function Explore() {
             </TagComponent>
             {tags.map((tag) => (
               <TagComponent
-                key="tag"
+                key={tag}
                 onClick={() => handleToogleSelectedTag(tag)}
                 selected={selectedTags.includes(tag)}
               >

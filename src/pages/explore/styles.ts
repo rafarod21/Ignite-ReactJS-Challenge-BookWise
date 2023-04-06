@@ -25,7 +25,7 @@ export const ExploreHeader = styled('header', {
     },
   },
 
-  '@bpmd': {
+  '@bplg': {
     flexDirection: 'column',
     gap: '$5',
   },
