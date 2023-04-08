@@ -1,5 +1,7 @@
+import { signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
+import * as Dialog from '@radix-ui/react-dialog'
 import {
   ChartLineUp,
   Binoculars,
@@ -9,6 +11,7 @@ import {
 } from '@phosphor-icons/react'
 
 import { Avatar } from '../Avatar'
+import { DialogLogin } from '../DialogLogin'
 
 import logoImg from '../../assets/book-wise-logo.svg'
 
@@ -18,18 +21,13 @@ import {
   NavbarWrapper,
   NavbarFooter,
 } from './styles'
-import { useState } from 'react'
 
 export function Navbar() {
-  const [isLogged, setIsLogged] = useState(false)
   const router = useRouter()
-
-  function handleSignIn() {
-    setIsLogged(true)
-  }
+  const { data: session } = useSession()
 
   function handleSignOut() {
-    setIsLogged(false)
+    signOut()
   }
 
   return (
@@ -47,7 +45,7 @@ export function Navbar() {
           >
             <Binoculars /> Explorar
           </NavbarButton>
-          {isLogged && (
+          {session && (
             <NavbarButton
               href="/profile"
               isSelected={router.asPath.startsWith('/profile')}
@@ -58,18 +56,24 @@ export function Navbar() {
         </NavbarWrapper>
       </div>
 
-      <NavbarFooter isLogged={isLogged}>
-        {isLogged ? (
+      <NavbarFooter isLogged={!!session}>
+        {session ? (
           <button onClick={handleSignOut}>
-            <Avatar size="sm" src="https://github.com/rafarod21.png" />
-            <span>Rafael</span>
+            <Avatar size="sm" src={session.user.avatar_url} />
+            <span>{session.user.name.split(' ')[0]}</span>
             <SignOut />
           </button>
         ) : (
-          <button onClick={handleSignIn}>
-            <strong>Fazer login</strong>
-            <SignIn />
-          </button>
+          <Dialog.Root>
+            <Dialog.Trigger asChild>
+              <button>
+                <strong>Fazer login</strong>
+                <SignIn />
+              </button>
+            </Dialog.Trigger>
+
+            <DialogLogin />
+          </Dialog.Root>
         )}
       </NavbarFooter>
     </NavbarContainer>

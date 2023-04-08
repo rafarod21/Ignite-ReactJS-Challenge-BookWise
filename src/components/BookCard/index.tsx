@@ -3,7 +3,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 
 import { RatingStars } from '../RatingStars'
 
-import { Book } from '@/@types/Book'
+import { Book } from '@/@types/book'
 
 import { BookCardContainer, BookCardInfo } from './styles'
 

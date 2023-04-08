@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { Avatar } from '../Avatar'
 import { RatingStars } from '../RatingStars'
 
-import { Book } from '@/@types/Book'
+import { Book } from '@/@types/book'
 
 import {
   BookCardWithUserContainer,

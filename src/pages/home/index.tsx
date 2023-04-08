@@ -7,7 +7,7 @@ import { BookCardWithUser } from '@/components/BookCardWithUser'
 import { BookCard } from '@/components/BookCard'
 import { DialogBook } from '@/components/DialogBook'
 
-import { Book } from '@/@types/Book'
+import { Book } from '@/@types/book'
 
 import {
   HomeContainer,

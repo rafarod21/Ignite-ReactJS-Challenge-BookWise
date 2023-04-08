@@ -33,7 +33,7 @@ export const ProfileContent = styled('div', {
 
   paddingBottom: '$10',
 
-  '@bpmd': {
+  '@bplg': {
     display: 'flex',
     flexDirection: 'column-reverse',
   },
@@ -165,7 +165,7 @@ export const UserDetails = styled('section', {
     },
   },
 
-  '@bpmd': {
+  '@bplg': {
     borderLeft: 0,
     marginBottom: '$8',
 

@@ -6,9 +6,9 @@ import { Layout } from '@/components/Layout'
 import { DialogBook } from '@/components/DialogBook'
 import { BookCard } from '@/components/BookCard'
 
-import { Book } from '@/@types/Book'
-import { tags } from '@/@types/Tags'
-import { Tag } from '@/@types/Category'
+import { Book } from '@/@types/book'
+import { tags } from '@/@types/tags'
+import { Tag } from '@/@types/category'
 
 import {
   ExploreContainer,

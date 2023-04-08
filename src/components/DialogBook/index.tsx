@@ -7,7 +7,7 @@ import { DialogLogin } from '../DialogLogin'
 import { RatingStars } from '../RatingStars'
 import { Avatar } from '../Avatar'
 
-import { Book } from '@/@types/Book'
+import { Book } from '@/@types/book'
 
 import {
   BookAbout,

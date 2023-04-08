@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { signIn, useSession } from 'next-auth/react'
 import { X } from '@phosphor-icons/react'
 import * as Dialog from '@radix-ui/react-dialog'
 
@@ -15,6 +16,17 @@ import {
 } from './styles'
 
 export function DialogLogin() {
+  const session = useSession()
+  const isLoggingIn = session.status === 'loading'
+
+  async function handleConnectGoogle() {
+    await signIn('google')
+  }
+
+  async function handleConnectGithub() {
+    await signIn('github')
+  }
+
   return (
     <Dialog.Portal>
       <DialogOverlay />
@@ -25,11 +37,11 @@ export function DialogLogin() {
         <DialogTitle>Faça login para continuar</DialogTitle>
 
         <LoginWrapper>
-          <LoginButton>
+          <LoginButton onClick={handleConnectGoogle} disabled={isLoggingIn}>
             <Image src={iconGoogle} height={32} width={32} alt="Google" />{' '}
             Entrar com Google
           </LoginButton>
-          <LoginButton>
+          <LoginButton onClick={handleConnectGithub} disabled={isLoggingIn}>
             <Image src={iconGitHub} height={32} width={32} alt="Google" />{' '}
             Entrar com GitHub
           </LoginButton>

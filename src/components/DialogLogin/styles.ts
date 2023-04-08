@@ -78,7 +78,7 @@ export const LoginButton = styled('button', {
 
   transition: 'all 0.2s',
 
-  '&:hover': {
+  '&:not(:disabled):hover': {
     border: '2px solid $gray500',
   },
 })

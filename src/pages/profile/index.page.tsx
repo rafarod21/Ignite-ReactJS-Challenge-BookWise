@@ -1,3 +1,4 @@
+import { useSession } from 'next-auth/react'
 import {
   BookmarkSimple,
   BookOpen,
@@ -12,7 +13,7 @@ import { Layout } from '@/components/Layout'
 import { Avatar } from '@/components/Avatar'
 import { BookCard } from '@/components/BookCard'
 
-import { Book } from '@/@types/Book'
+import { Book } from '@/@types/book'
 
 import {
   BooksList,
@@ -46,6 +47,17 @@ const BOOK: Book = {
 }
 
 export default function Profile() {
+  const { status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      // The user is not authenticated, handle it here.
+    },
+  })
+
+  if (status === 'loading') {
+    return 'Loading or not authenticated...'
+  }
+
   return (
     <Layout>
       <Dialog.Root>
