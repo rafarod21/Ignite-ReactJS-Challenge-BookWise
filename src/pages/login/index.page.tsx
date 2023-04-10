@@ -1,4 +1,8 @@
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react'
 import Image from 'next/image'
+import { Spinner } from '@phosphor-icons/react'
 import {
   LoginContainer,
   ImageCover,
@@ -14,6 +18,32 @@ import iconGitHub from '../../assets/icon-github.svg'
 import iconRocket from '../../assets/icon-rocket.svg'
 
 export default function Login() {
+  const { status } = useSession()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      router.push('/')
+    }
+  }, [status, router])
+
+  if (status === 'authenticated') {
+    return (
+      <span
+        style={{
+          height: '100vh',
+          width: '100vw',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '0.5rem',
+        }}
+      >
+        <Spinner /> Redirecionando...
+      </span>
+    )
+  }
+
   return (
     <LoginContainer>
       <ImageCover>

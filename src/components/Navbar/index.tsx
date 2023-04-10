@@ -47,7 +47,7 @@ export function Navbar() {
           </NavbarButton>
           {session && (
             <NavbarButton
-              href="/profile"
+              href={`/profile/${session.user.id}`}
               isSelected={router.asPath.startsWith('/profile')}
             >
               <User /> Perfil

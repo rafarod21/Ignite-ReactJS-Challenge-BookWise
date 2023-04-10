@@ -76,10 +76,10 @@ export default function Home() {
                   </button>
                 </div>
                 <div>
-                  <BookCard book={BOOK} />
-                  <BookCard book={BOOK} />
-                  <BookCard book={BOOK} />
-                  <BookCard book={BOOK} />
+                  <BookCard book={BOOK} rating={4} />
+                  <BookCard book={BOOK} rating={4} />
+                  <BookCard book={BOOK} rating={4} />
+                  <BookCard book={BOOK} rating={4} />
                 </div>
               </div>
             </HomePopularBooks>

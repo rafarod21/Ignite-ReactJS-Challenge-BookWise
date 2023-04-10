@@ -2,7 +2,7 @@ import { Star } from '@phosphor-icons/react'
 import { RatingStarsContainer } from './styles'
 
 interface RatingStarsProps {
-  rating: 0 | 1 | 2 | 3 | 4 | 5
+  rating: number
   size?: 'sm' | 'md' | 'lg'
 }
 

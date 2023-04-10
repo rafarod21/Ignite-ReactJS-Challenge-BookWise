@@ -1,6 +1,9 @@
 import { useState } from 'react'
+import { GetStaticProps } from 'next'
 import { Binoculars, MagnifyingGlass } from '@phosphor-icons/react'
 import * as Dialog from '@radix-ui/react-dialog'
+
+import { prisma } from '@/lib/prisma'
 
 import { Layout } from '@/components/Layout'
 import { DialogBook } from '@/components/DialogBook'
@@ -40,7 +43,11 @@ const BOOK: Book = {
   ],
 }
 
-export default function Explore() {
+interface ExploreProps {
+  books: Book[]
+}
+
+export default function Explore({ books }: ExploreProps) {
   const [selectedTags, setSelectedTags] = useState<Tag[]>([])
 
   function handleToogleSelectedTag(tag: Tag) {
@@ -86,18 +93,18 @@ export default function Explore() {
             ))}
           </BooksTags>
           <BooksList>
-            <BookCard book={BOOK} />
-            <BookCard book={BOOK} />
-            <BookCard book={BOOK} />
-            <BookCard book={BOOK} />
-            <BookCard book={BOOK} />
-            <BookCard book={BOOK} />
-            <BookCard book={BOOK} />
-            <BookCard book={BOOK} />
-            <BookCard book={BOOK} />
-            <BookCard book={BOOK} />
-            <BookCard book={BOOK} />
-            <BookCard book={BOOK} />
+            <BookCard book={BOOK} rating={4} />
+            <BookCard book={BOOK} rating={4} />
+            <BookCard book={BOOK} rating={4} />
+            <BookCard book={BOOK} rating={4} />
+            <BookCard book={BOOK} rating={4} />
+            <BookCard book={BOOK} rating={4} />
+            <BookCard book={BOOK} rating={4} />
+            <BookCard book={BOOK} rating={4} />
+            <BookCard book={BOOK} rating={4} />
+            <BookCard book={BOOK} rating={4} />
+            <BookCard book={BOOK} rating={4} />
+            <BookCard book={BOOK} rating={4} />
           </BooksList>
         </ExploreContainer>
 
@@ -105,4 +112,15 @@ export default function Explore() {
       </Dialog.Root>
     </Layout>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const books = await prisma.book.findMany()
+
+  return {
+    props: {
+      books,
+    },
+    revalidate: 60 * 60 * 24, // 1 day
+  }
 }

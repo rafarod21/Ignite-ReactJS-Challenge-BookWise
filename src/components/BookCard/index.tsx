@@ -9,10 +9,11 @@ import { BookCardContainer, BookCardInfo } from './styles'
 
 interface BookCardProps {
   book: Book
+  rating: number
   hasSummary?: boolean
 }
 
-export function BookCard({ book, hasSummary = false }: BookCardProps) {
+export function BookCard({ book, rating, hasSummary = false }: BookCardProps) {
   return (
     <Dialog.Trigger asChild>
       <BookCardContainer hasSummary={hasSummary}>
@@ -28,7 +29,7 @@ export function BookCard({ book, hasSummary = false }: BookCardProps) {
               <h4>{book.name}</h4>
               <span>{book.author}</span>
             </div>
-            <RatingStars rating={4} />
+            <RatingStars rating={rating} />
           </BookCardInfo>
         </div>
         {hasSummary && <p>{book.summary}</p>}
