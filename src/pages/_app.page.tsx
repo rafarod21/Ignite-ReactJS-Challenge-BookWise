@@ -1,4 +1,4 @@
-// _app.tsx
+import '../lib/dayjs'
 
 import type { AppProps } from 'next/app'
 // eslint-disable-next-line camelcase

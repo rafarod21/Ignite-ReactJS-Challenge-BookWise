@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import Image from 'next/image'
 
 import { RatingStars } from '../RatingStars'
@@ -13,23 +14,30 @@ import {
 
 interface BookCardLastReadingProps {
   book: Book
+  rating: {
+    rate: number
+    createdAtAsString: string
+  }
 }
 
-export function BookCardLastReading({ book }: BookCardLastReadingProps) {
+export function BookCardLastReading({
+  book,
+  rating,
+}: BookCardLastReadingProps) {
   return (
     <>
       {/* Version lg */}
       <BookCardLastReadingContainer>
         <Image
-          src={book.cover_url}
+          src={book.coverUrl}
           height={160}
           width={110}
           alt="Nome do livro"
         />
         <BookCardLastReadingContent>
           <BookCardLastReadingHeader>
-            <span>Há 2 dias</span>
-            <RatingStars rating={4} />
+            <span>{dayjs(rating.createdAtAsString).fromNow()}</span>
+            <RatingStars rating={rating.rate} />
           </BookCardLastReadingHeader>
           <h4>{book.name}</h4>
           <span>{book.author}</span>
@@ -40,12 +48,12 @@ export function BookCardLastReading({ book }: BookCardLastReadingProps) {
       {/* Version md and sm */}
       <BookCardLastReadingContainer2>
         <BookCardLastReadingHeader>
-          <span>Há 2 dias</span>
-          <RatingStars rating={4} />
+          <span>{dayjs(rating.createdAtAsString).fromNow()}</span>
+          <RatingStars rating={rating.rate} />
         </BookCardLastReadingHeader>
         <div>
           <Image
-            src={book.cover_url}
+            src={book.coverUrl}
             height={160}
             width={110}
             alt="Nome do livro"

@@ -1,6 +1,6 @@
 import { styled } from '@/styles/stitches.config'
 
-export const BookCardWithUserContainer = styled('div', {
+export const BookCardRatedContainer = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   padding: '$6',
@@ -30,7 +30,7 @@ export const BookCardWithUserContainer = styled('div', {
   },
 })
 
-export const BookCardWithUserHeader = styled('header', {
+export const BookCardRatedHeader = styled('header', {
   display: 'flex',
   // alignItems: 'center',
   gap: '$4',
@@ -45,11 +45,15 @@ export const BookCardWithUserHeader = styled('header', {
     span: {
       fontSize: '$sm',
       color: '$gray400',
+
+      '&::first-letter': {
+        textTransform: 'capitalize',
+      },
     },
   },
 })
 
-export const BookCardWithUserContent = styled('div', {
+export const BookCardRatedContent = styled('div', {
   display: 'flex',
   gap: '$5',
 

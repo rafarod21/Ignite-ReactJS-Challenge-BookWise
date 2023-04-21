@@ -106,7 +106,7 @@ export const HomePopularBooks = styled('section', {
       fontSize: '$sm',
       lineHeight: '$base',
 
-      button: {
+      a: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

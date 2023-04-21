@@ -77,6 +77,10 @@ export const BookCardLastReadingHeader = styled('header', {
     flex: 1,
     fontSize: '$sm',
     lineHeight: '$base',
+
+    '&::first-letter': {
+      textTransform: 'capitalize',
+    },
   },
 
   '@bpmd': {

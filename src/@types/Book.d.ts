@@ -5,7 +5,8 @@ export type Book = {
   name: string
   author: string
   summary: string
-  cover_url: string
-  total_pages: number
+  coverUrl: string
+  totalPages: number
+  rate: number
   categories: Category[]
 }

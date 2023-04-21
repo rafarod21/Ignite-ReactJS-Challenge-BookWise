@@ -38,7 +38,7 @@ export function DialogBook({ book }: DialogBookProps) {
         <BookDetail>
           <div>
             <Image
-              src={book.cover_url}
+              src={book.coverUrl}
               height={242}
               width={172}
               alt="Nome do livro"
@@ -74,7 +74,7 @@ export function DialogBook({ book }: DialogBookProps) {
               <BookOpen />
               <div>
                 <span>Páginas</span>
-                <strong>{book.total_pages}</strong>
+                <strong>{book.totalPages}</strong>
               </div>
             </div>
           </BookAbout>

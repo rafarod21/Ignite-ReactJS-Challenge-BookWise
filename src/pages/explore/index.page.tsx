@@ -10,8 +10,8 @@ import { DialogBook } from '@/components/DialogBook'
 import { BookCard } from '@/components/BookCard'
 
 import { Book } from '@/@types/book'
-import { tags } from '@/@types/tags'
-import { Tag } from '@/@types/category'
+import { Tag } from '@/@types/Category'
+import { tags } from '@/@types/tag'
 
 import {
   ExploreContainer,
@@ -31,6 +31,7 @@ const BOOK: Book = {
   cover_url:
     '/images/books/14-habitos-de-desenvolvedores-altamente-produtivos.png',
   total_pages: 160,
+  rate: 4,
   categories: [
     {
       name: 'Educação',
@@ -93,18 +94,9 @@ export default function Explore({ books }: ExploreProps) {
             ))}
           </BooksTags>
           <BooksList>
-            <BookCard book={BOOK} rating={4} />
-            <BookCard book={BOOK} rating={4} />
-            <BookCard book={BOOK} rating={4} />
-            <BookCard book={BOOK} rating={4} />
-            <BookCard book={BOOK} rating={4} />
-            <BookCard book={BOOK} rating={4} />
-            <BookCard book={BOOK} rating={4} />
-            <BookCard book={BOOK} rating={4} />
-            <BookCard book={BOOK} rating={4} />
-            <BookCard book={BOOK} rating={4} />
-            <BookCard book={BOOK} rating={4} />
-            <BookCard book={BOOK} rating={4} />
+            {books.map((book) => (
+              <BookCard key={book.id} book={book} />
+            ))}
           </BooksList>
         </ExploreContainer>
 
@@ -115,7 +107,18 @@ export default function Explore({ books }: ExploreProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const books = await prisma.book.findMany()
+  const books = await prisma.book.findMany({
+    select: {
+      id: true,
+      name: true,
+      author: true,
+      summary: true,
+      cover_url: true,
+      total_pages: true,
+      rate: true,
+      categories: true,
+    },
+  })
 
   return {
     props: {

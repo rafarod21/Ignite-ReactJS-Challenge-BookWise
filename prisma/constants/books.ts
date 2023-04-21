@@ -8,6 +8,7 @@ export const books = [
     cover_url:
       '/images/books/14-habitos-de-desenvolvedores-altamente-produtivos.png',
     total_pages: 160,
+    rate: Math.floor(Math.random() * 6),
     categories: [
       {
         name: 'Educação',
@@ -27,6 +28,7 @@ export const books = [
       'Semper et sapien proin vitae nisi. Feugiat neque integer donec et aenean posuere amet ultrices. Cras fermentum id pulvinar varius leo a in. Amet libero pharetra nunc elementum fringilla velit ipsum. Sed vulputate massa velit nibh',
     cover_url: '/images/books/o-hobbit.png',
     total_pages: 360,
+    rate: Math.floor(Math.random() * 6),
     categories: [
       {
         name: 'Ficção',
@@ -44,8 +46,9 @@ export const books = [
     author: 'Douglas Adams',
     summary:
       'Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis. Penatibus id vestibulum imperdiet a at imperdiet lectus leo. Sit porta eget nec vitae sit vulputate eget',
-    cover_url: '/images/books/o-guia-do-mochileiro-das-galáxias.png',
+    cover_url: '/images/books/o-guia-do-mochileiro-das-galaxias.png',
     total_pages: 250,
+    rate: Math.floor(Math.random() * 6),
     categories: [
       {
         name: 'Ficção',
@@ -65,6 +68,7 @@ export const books = [
       'Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis. Penatibus id vestibulum imperdiet a at imperdiet lectus leo. Sit porta eget nec vitae sit vulputate eget',
     cover_url: '/images/books/a-revolucao-dos-bixos.png',
     total_pages: 350,
+    rate: Math.floor(Math.random() * 6),
     categories: [
       {
         name: 'Alegoria',
@@ -84,6 +88,7 @@ export const books = [
       'Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis. Penatibus id vestibulum imperdiet a at imperdiet lectus leo. Sit porta eget nec vitae sit vulputate eget',
     cover_url: '/images/books/o-fim-da-eternidade.png',
     total_pages: 165,
+    rate: Math.floor(Math.random() * 6),
     categories: [
       {
         name: 'Ficção',
@@ -103,6 +108,7 @@ export const books = [
       'Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis. Penatibus id vestibulum imperdiet a at imperdiet lectus leo. Sit porta eget nec vitae sit vulputate eget',
     cover_url: '/images/books/entendendo-algoritmos.png',
     total_pages: 165,
+    rate: Math.floor(Math.random() * 6),
     categories: [
       {
         name: 'Programação',
@@ -122,6 +128,7 @@ export const books = [
       'Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis. Penatibus id vestibulum imperdiet a at imperdiet lectus leo. Sit porta eget nec vitae sit vulputate eget',
     cover_url: '/images/books/codigo-limpo.png',
     total_pages: 365,
+    rate: Math.floor(Math.random() * 6),
     categories: [
       {
         name: 'Programação',
@@ -141,6 +148,7 @@ export const books = [
       'Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis. Penatibus id vestibulum imperdiet a at imperdiet lectus leo. Sit porta eget nec vitae sit vulputate eget',
     cover_url: '/images/books/o-poder-do-habito.png',
     total_pages: 288,
+    rate: Math.floor(Math.random() * 6),
     categories: [
       {
         name: 'Autoajuda',
@@ -160,6 +168,7 @@ export const books = [
       'Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis. Penatibus id vestibulum imperdiet a at imperdiet lectus leo. Sit porta eget nec vitae sit vulputate eget',
     cover_url: '/images/books/arquitetura-limpa.png',
     total_pages: 288,
+    rate: Math.floor(Math.random() * 6),
     categories: [
       {
         name: 'Programação',
@@ -179,6 +188,7 @@ export const books = [
       'Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis. Penatibus id vestibulum imperdiet a at imperdiet lectus leo. Sit porta eget nec vitae sit vulputate eget',
     cover_url: '/images/books/historias-extraordinarias.png',
     total_pages: 332,
+    rate: Math.floor(Math.random() * 6),
     categories: [
       {
         name: 'Ficção',
@@ -198,6 +208,7 @@ export const books = [
       'Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis. Penatibus id vestibulum imperdiet a at imperdiet lectus leo. Sit porta eget nec vitae sit vulputate eget',
     cover_url: '/images/books/refatoracao.png',
     total_pages: 332,
+    rate: Math.floor(Math.random() * 6),
     categories: [
       {
         name: 'Programação',
@@ -217,6 +228,7 @@ export const books = [
       'Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis. Penatibus id vestibulum imperdiet a at imperdiet lectus leo. Sit porta eget nec vitae sit vulputate eget',
     cover_url: '/images/books/domain-driven-design.png',
     total_pages: 288,
+    rate: Math.floor(Math.random() * 6),
     categories: [
       {
         name: 'Programação',
@@ -236,6 +248,7 @@ export const books = [
       'Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis. Penatibus id vestibulum imperdiet a at imperdiet lectus leo. Sit porta eget nec vitae sit vulputate eget',
     cover_url: '/images/books/viagem-ao-centro-da-terra.png',
     total_pages: 288,
+    rate: Math.floor(Math.random() * 6),
     categories: [
       {
         name: 'Romance',
@@ -255,6 +268,7 @@ export const books = [
       'Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis. Penatibus id vestibulum imperdiet a at imperdiet lectus leo. Sit porta eget nec vitae sit vulputate eget',
     cover_url: '/images/books/fragmentos-do-horror.png',
     total_pages: 144,
+    rate: Math.floor(Math.random() * 6),
     categories: [
       {
         name: 'Ficção',
@@ -274,6 +288,7 @@ export const books = [
       'Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis. Penatibus id vestibulum imperdiet a at imperdiet lectus leo. Sit porta eget nec vitae sit vulputate eget',
     cover_url: '/images/books/o-programador-pragmatico.png',
     total_pages: 205,
+    rate: Math.floor(Math.random() * 6),
     categories: [
       {
         name: 'Programação',

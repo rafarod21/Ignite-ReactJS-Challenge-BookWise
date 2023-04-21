@@ -1,13 +1,16 @@
+import Link from 'next/link'
+import { useSession } from 'next-auth/react'
 import { CaretRight, ChartLineUp } from '@phosphor-icons/react'
 import * as Dialog from '@radix-ui/react-dialog'
 
 import { Layout } from '@/components/Layout'
 import { BookCardLastReading } from '@/components/BookCardLastReading'
-import { BookCardWithUser } from '@/components/BookCardWithUser'
+import { BookCardRated } from '@/components/BookCardRated'
 import { BookCard } from '@/components/BookCard'
 import { DialogBook } from '@/components/DialogBook'
 
 import { Book } from '@/@types/book'
+import { User } from '@/@types/user'
 
 import {
   HomeContainer,
@@ -24,9 +27,10 @@ const BOOK: Book = {
   author: 'Zeno Rocha',
   summary:
     'Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis. Penatibus id vestibulum imperdiet a at imperdiet lectus leo. Sit porta eget nec vitae sit vulputate eget',
-  cover_url:
+  coverUrl:
     '/images/books/14-habitos-de-desenvolvedores-altamente-produtivos.png',
-  total_pages: 160,
+  totalPages: 160,
+  rate: 4,
   categories: [
     {
       name: 'Educação',
@@ -39,7 +43,44 @@ const BOOK: Book = {
   ],
 }
 
-export default function Home() {
+// const USER: User = {
+//   id: 'asdadfasfasdfasdfasudhfiasfiasfpisahfuhipsuafhpiuasfigpafg',
+//   name: 'Rafael Rosman Rodrigues Montrezol',
+//   avatarUrl: 'https://github.com/rafarod21.png',
+//   createdAtAsString: new Date().toISOString(),
+// }
+
+// const RATING = {
+//   rate: 4,
+//   createdAt: new Date(),
+// }
+
+interface HomeProps {
+  recentsReviews: {
+    user: User
+    rating: {
+      rate: number
+      createdAtAsString: string
+    }
+    book: Book
+  }[]
+  lastReading: {
+    book: Book
+    rating: {
+      rate: number
+      createdAtAsString: string
+    }
+  } | null
+  popularBooks: Book[]
+}
+
+export default function Home({
+  lastReading,
+  recentsReviews,
+  popularBooks,
+}: HomeProps) {
+  const { data: session } = useSession()
+
   return (
     <Layout>
       <Dialog.Root>
@@ -50,36 +91,51 @@ export default function Home() {
             </h1>
           </HomeHeader>
           <HomeContent>
-            <HomeLastRead>
-              <div>
-                Sua última leitura
-                <button>
-                  Ver todas <CaretRight weight="bold" />
-                </button>
-              </div>
-              <BookCardLastReading book={BOOK} />
-            </HomeLastRead>
+            {session && (
+              <HomeLastRead>
+                <div>
+                  Sua última leitura
+                  {lastReading && (
+                    <button>
+                      Ver todas <CaretRight weight="bold" />
+                    </button>
+                  )}
+                </div>
+                {lastReading ? (
+                  <BookCardLastReading
+                    book={lastReading.book}
+                    rating={lastReading.rating}
+                  />
+                ) : (
+                  'Você ainda não leu nenhum livro...'
+                )}
+              </HomeLastRead>
+            )}
             <HomeRecentReviews>
               <span>Avalizações mais recentes</span>
               <div>
-                <BookCardWithUser book={BOOK} />
-                <BookCardWithUser book={BOOK} />
-                <BookCardWithUser book={BOOK} />
+                {recentsReviews.map((review, index) => (
+                  <BookCardRated
+                    key={`${review.rating.createdAtAsString}-${index}`}
+                    book={review.book}
+                    user={review.user}
+                    rating={review.rating}
+                  />
+                ))}
               </div>
             </HomeRecentReviews>
             <HomePopularBooks>
               <div>
                 <div>
                   Livros populares
-                  <button>
+                  <Link href="/explore">
                     Ver todos <CaretRight weight="bold" />
-                  </button>
+                  </Link>
                 </div>
                 <div>
-                  <BookCard book={BOOK} rating={4} />
-                  <BookCard book={BOOK} rating={4} />
-                  <BookCard book={BOOK} rating={4} />
-                  <BookCard book={BOOK} rating={4} />
+                  {popularBooks.map((book) => (
+                    <BookCard key={book.id} book={book} />
+                  ))}
                 </div>
               </div>
             </HomePopularBooks>

@@ -40,6 +40,7 @@ async function main() {
         summary: book.summary,
         cover_url: book.cover_url,
         total_pages: book.total_pages,
+        rate: book.rate,
         categories: {
           create: [
             ...book.categories.map((category) => {
