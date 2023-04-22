@@ -31,6 +31,7 @@ export const BookCardLastReadingContainer = styled('div', {
 export const BookCardLastReadingContent = styled('div', {
   display: 'flex',
   flexDirection: 'column',
+  justifyContent: 'space-between',
 
   lineHeight: '$base',
 

@@ -28,9 +28,9 @@ const BOOK: Book = {
   author: 'Zeno Rocha',
   summary:
     'Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis. Penatibus id vestibulum imperdiet a at imperdiet lectus leo. Sit porta eget nec vitae sit vulputate eget',
-  cover_url:
+  coverUrl:
     '/images/books/14-habitos-de-desenvolvedores-altamente-produtivos.png',
-  total_pages: 160,
+  totalPages: 160,
   rate: 4,
   categories: [
     {
@@ -63,6 +63,21 @@ export default function Explore({ books }: ExploreProps) {
     }
   }
 
+  const filteredBooksByTags =
+    selectedTags.length > 0
+      ? books.filter((book) => {
+          const haveAllTags = selectedTags.reduce(
+            (accumulator, currentValue) => {
+              if (!accumulator) return false
+              return book.categories.includes(currentValue)
+            },
+            true,
+          )
+
+          return haveAllTags
+        })
+      : []
+
   return (
     <Layout>
       <Dialog.Root>
@@ -94,9 +109,11 @@ export default function Explore({ books }: ExploreProps) {
             ))}
           </BooksTags>
           <BooksList>
-            {books.map((book) => (
-              <BookCard key={book.id} book={book} />
-            ))}
+            {selectedTags.length
+              ? filteredBooksByTags.map((book) => (
+                  <BookCard key={book.id} book={book} />
+                ))
+              : books.map((book) => <BookCard key={book.id} book={book} />)}
           </BooksList>
         </ExploreContainer>
 
@@ -107,17 +124,27 @@ export default function Explore({ books }: ExploreProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const books = await prisma.book.findMany({
-    select: {
-      id: true,
-      name: true,
-      author: true,
-      summary: true,
-      cover_url: true,
-      total_pages: true,
-      rate: true,
-      categories: true,
+  const booksResponse = await prisma.book.findMany({
+    include: {
+      categories: {
+        include: {
+          category: true,
+        },
+      },
     },
+  })
+
+  const books = booksResponse.map((book) => {
+    return {
+      id: book.id,
+      name: book.name,
+      author: book.author,
+      summary: book.summary,
+      coverUrl: book.cover_url,
+      totalPages: book.total_pages,
+      rate: book.rate,
+      categories: book.categories.map((category) => category.category.name),
+    }
   })
 
   return {

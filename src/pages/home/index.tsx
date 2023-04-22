@@ -96,9 +96,9 @@ export default function Home({
                 <div>
                   Sua última leitura
                   {lastReading && (
-                    <button>
+                    <Link href="/profile">
                       Ver todas <CaretRight weight="bold" />
-                    </button>
+                    </Link>
                   )}
                 </div>
                 {lastReading ? (

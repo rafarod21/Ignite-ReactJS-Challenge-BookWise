@@ -35,12 +35,14 @@ export function BookCardLastReading({
           alt="Nome do livro"
         />
         <BookCardLastReadingContent>
-          <BookCardLastReadingHeader>
-            <span>{dayjs(rating.createdAtAsString).fromNow()}</span>
-            <RatingStars rating={rating.rate} />
-          </BookCardLastReadingHeader>
-          <h4>{book.name}</h4>
-          <span>{book.author}</span>
+          <div>
+            <BookCardLastReadingHeader>
+              <span>{dayjs(rating.createdAtAsString).fromNow()}</span>
+              <RatingStars rating={rating.rate} />
+            </BookCardLastReadingHeader>
+            <h4>{book.name}</h4>
+            <span>{book.author}</span>
+          </div>
           <p>{book.summary}</p>
         </BookCardLastReadingContent>
       </BookCardLastReadingContainer>
