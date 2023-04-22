@@ -43,18 +43,6 @@ const BOOK: Book = {
   ],
 }
 
-// const USER: User = {
-//   id: 'asdadfasfasdfasdfasudhfiasfiasfpisahfuhipsuafhpiuasfigpafg',
-//   name: 'Rafael Rosman Rodrigues Montrezol',
-//   avatarUrl: 'https://github.com/rafarod21.png',
-//   createdAtAsString: new Date().toISOString(),
-// }
-
-// const RATING = {
-//   rate: 4,
-//   createdAt: new Date(),
-// }
-
 interface HomeProps {
   recentsReviews: {
     user: User
@@ -96,7 +84,7 @@ export default function Home({
                 <div>
                   Sua última leitura
                   {lastReading && (
-                    <Link href="/profile">
+                    <Link href={`/profile/${session.user.id}`}>
                       Ver todas <CaretRight weight="bold" />
                     </Link>
                   )}

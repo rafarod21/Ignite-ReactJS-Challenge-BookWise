@@ -1,10 +1,11 @@
+import dayjs from 'dayjs'
 import { useSession } from 'next-auth/react'
 import {
   BookmarkSimple,
   BookOpen,
   Books,
   MagnifyingGlass,
-  User,
+  User as UserIcon,
   UserList,
 } from '@phosphor-icons/react'
 import { GetStaticPaths, GetStaticProps } from 'next'
@@ -14,9 +15,10 @@ import { Layout } from '@/components/Layout'
 import { Avatar } from '@/components/Avatar'
 import { BookCard } from '@/components/BookCard'
 
-import { Book } from '@/@types/book'
-
 import { prisma } from '@/lib/prisma'
+
+import { User } from '@/@types/user'
+import { Book } from '@/@types/book'
 
 import {
   BooksList,
@@ -29,31 +31,26 @@ import {
 } from './styles'
 
 interface ProfileProps {
-  user: {
-    userId: string
-    name: string
-    avatarUrl: string
-    createdAt: Date
-  }
-  books: {
+  user: User
+  readBooks: {
     book: Book
-    rate: {
-      ratedAt: Date
-      rating: number
+    rating: {
+      rate: number
+      createdAtAsString: string
     }
   }[]
   pagesRead: number
   ratedBooks: number
-  authorsRead: number
+  amountAuthorsRead: number
   mostReadCategory: string
 }
 
 export default function Profile({
   user,
-  books,
+  readBooks,
   pagesRead,
   ratedBooks,
-  authorsRead,
+  amountAuthorsRead,
   mostReadCategory,
 }: ProfileProps) {
   const { status } = useSession({
@@ -73,7 +70,7 @@ export default function Profile({
         <ProfileContainer>
           <ProfileHeader>
             <h1>
-              <User /> Perfil
+              <UserIcon /> Perfil
             </h1>
           </ProfileHeader>
           <ProfileContent>
@@ -82,22 +79,24 @@ export default function Profile({
                 <input type="text" placeholder="Buscar livro avaliado" />
                 <MagnifyingGlass />
               </SearchBook>
-              {books.map((book) => (
-                <HowLongBlock key={book.book.id}>
-                  <span>{`Há ${book.rate.ratedAt} dias/semanas/meses/anos`}</span>
+              {readBooks.map((readBook) => (
+                <HowLongBlock key={readBook.book.id}>
+                  <span>
+                    {dayjs(readBook.rating.createdAtAsString).fromNow()}
+                  </span>
                   <BookCard
-                    book={book.book}
+                    book={readBook.book}
                     hasSummary
-                    rating={book.rate.rating}
+                    rating={readBook.rating.rate}
                   />
                 </HowLongBlock>
               ))}
             </BooksList>
             <UserDetails>
               <header>
-                <Avatar size="lg" src="https://github.com/rafarod21.png" />
+                <Avatar size="lg" src={user.avatarUrl} />
                 <h2>{user.name}</h2>
-                <span>{`membro desde ${user.createdAt}`}</span>
+                <span>{`membro desde ${user.createdAtAsString}`}</span>
               </header>
               <div />
               <div>
@@ -120,7 +119,7 @@ export default function Profile({
                 <div>
                   <UserList />
                   <div>
-                    <strong>{authorsRead}</strong>
+                    <strong>{amountAuthorsRead}</strong>
                     <span>Autores lidos</span>
                   </div>
                 </div>
@@ -151,30 +150,35 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const userId = String(params?.userid)
 
-  const user = await prisma.user.findUnique({
+  const userResponse = await prisma.user.findUnique({
     where: {
       id: userId,
     },
   })
 
-  if (!user) {
+  if (!userResponse) {
     return {
       notFound: true,
     }
   }
 
+  const user = {
+    id: userResponse.id,
+    name: userResponse.name,
+    avatarUrl: userResponse.avatar_url,
+    createdAtAsString: userResponse.created_at.toISOString(),
+  }
+
   const ratings = await prisma.rating.findMany({
-    orderBy: {
-      created_at: 'desc',
-    },
     where: {
-      user_id: user.id,
+      user_id: userId,
     },
     include: {
+      user: true,
       book: {
         include: {
           categories: {
-            select: {
+            include: {
               category: true,
             },
           },
@@ -183,111 +187,85 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     },
   })
 
-  if (ratings.length === 0) {
-    return {
-      props: {
-        user: {
-          name: user.name,
-          avatarUrl: user.avatar_url,
-          createdAt: user.created_at,
-        },
-        books: [],
-        pagesRead: 0,
-        ratedBooks: 0,
-        authorsRead: 0,
-        mostReadCategory: 'Não possui',
-      },
-      revalidate: 60 * 60 * 24, // 1 day
-    }
-  }
+  const ratedBooks = ratings.length
 
-  const books = ratings.map((rating) => {
+  const readBooks = ratings.map((rating) => {
     return {
-      book: rating.book,
-      rate: {
-        ratedAt: rating.created_at,
-        rating: rating.rate,
+      book: {
+        id: rating.book.id,
+        name: rating.book.name,
+        author: rating.book.author,
+        summary: rating.book.summary,
+        coverUrl: rating.book.cover_url,
+        totalPages: rating.book.total_pages,
+        rate: rating.book.rate,
+        categories: rating.book.categories.map(
+          (categoriesOnBook) => categoriesOnBook.category,
+        ),
+      },
+      rating: {
+        rate: rating.rate,
+        createdAtAsString: rating.created_at.toISOString(),
       },
     }
   })
 
-  const pagesRead = books.reduce(
-    (totalPages, currentBook) => totalPages + currentBook.book.total_pages,
-    0,
-  )
-
-  const ratedBooks = books.length
-
-  const { arrayAuthors, arrayCategoriesNames, arrayCategoriesAmount } =
-    books.reduce(
-      (accumulator, currentBook) => {
-        if (!accumulator.arrayAuthors.includes(currentBook.book.author)) {
-          accumulator.arrayAuthors.push(currentBook.book.author)
-        }
-
-        // Para cada categoria do livro atual verificar
-        // Se esta categoria já está no arrayCategoriesNames
-        //   Se encontrar, quer dizer que houve um livro anterior que possuía esta categoria,
-        //   então deve-se incrementar o indice dessa categoria no arrayCategoriesAmount
-
-        //   Se não encontrar, adicionar a nova categoria lida no arrayCategoriesNames e
-        //   adiconar no arrayCategoriesAmount mais uma posição com o número 1
-
-        currentBook.book.categories.forEach((currentBookCategory) => {
-          const indexInArrayCategoriesNames = arrayCategoriesNames.findIndex(
-            (element) => element === currentBookCategory.category.name,
-          )
-
-          // Não encontrou a categoria
-          if (indexInArrayCategoriesNames === -1) {
-            accumulator.arrayCategoriesNames.push(
-              currentBookCategory.category.name,
-            )
-            accumulator.arrayCategoriesAmount.push(1)
-          } else {
-            accumulator.arrayCategoriesAmount[indexInArrayCategoriesNames] += 1
-          }
-        })
-
-        return accumulator
-      },
-      {
-        arrayAuthors: [] as string[],
-        arrayCategoriesNames: [] as string[],
-        arrayCategoriesAmount: [] as number[],
-      },
-    )
-
-  const authorsRead = arrayAuthors.length
-
-  const { indexMostReadCategory } = arrayCategoriesAmount.reduce(
-    (accumulator, currentCategoryAmount, index) => {
-      if (accumulator.highestValueCategory < currentCategoryAmount) {
-        accumulator.highestValueCategory = currentCategoryAmount
-        accumulator.indexMostReadCategory = index
+  const { pagesRead, authorsRead } = readBooks.reduce(
+    (accumulator, book) => {
+      return {
+        pagesRead: (accumulator.pagesRead += book.book.totalPages),
+        authorsRead: accumulator.authorsRead.includes(book.book.author)
+          ? accumulator.authorsRead
+          : [...accumulator.authorsRead, book.book.author],
       }
+    },
+    {
+      pagesRead: 0,
+      authorsRead: [] as string[],
+    },
+  )
+  const amountAuthorsRead = authorsRead.length
+
+  const { arrayCategoryNames, arrayAmountCategories } = readBooks.reduce(
+    (accumulator, book) => {
+      book.book.categories.forEach((category) => {
+        const indexArray = accumulator.arrayCategoryNames.indexOf(category.name)
+
+        if (indexArray !== -1) {
+          accumulator.arrayAmountCategories[indexArray] += 1
+        } else {
+          accumulator.arrayCategoryNames = [
+            ...accumulator.arrayCategoryNames,
+            category.name,
+          ]
+          accumulator.arrayAmountCategories = [
+            ...accumulator.arrayAmountCategories,
+            1,
+          ]
+        }
+      })
 
       return accumulator
     },
     {
-      indexMostReadCategory: 0,
-      highestValueCategory: 0,
+      arrayCategoryNames: [] as string[],
+      arrayAmountCategories: [] as number[],
     },
   )
 
-  const mostReadCategory = arrayCategoriesNames[indexMostReadCategory]
+  const maxValueInArrayAmountCategories = Math.max(...arrayAmountCategories)
+  const mostReadCategory =
+    arrayCategoryNames[
+      arrayAmountCategories.indexOf(maxValueInArrayAmountCategories)
+    ]
 
   return {
     props: {
-      user: {
-        name: user.name,
-        avatarUrl: user.avatar_url,
-        createdAt: user.created_at,
-      },
-      books,
+      user,
+      readBooks,
       pagesRead,
       ratedBooks,
-      authorsRead,
+      amountAuthorsRead,
       mostReadCategory,
     },
     revalidate: 60 * 60 * 24, // 1 day

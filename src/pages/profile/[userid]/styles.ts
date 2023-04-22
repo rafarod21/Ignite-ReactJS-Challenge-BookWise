@@ -91,6 +91,10 @@ export const HowLongBlock = styled('div', {
   '> span': {
     fontSize: '$sm',
     color: '$gray300',
+
+    '&::first-letter': {
+      textTransform: 'capitalize',
+    },
   },
 
   '& + &': {
@@ -112,6 +116,8 @@ export const UserDetails = styled('section', {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    maxWidth: '80%',
+    textAlign: 'center',
 
     h2: {
       fontSize: '$xl',
