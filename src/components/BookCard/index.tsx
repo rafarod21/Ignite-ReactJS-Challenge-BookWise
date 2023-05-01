@@ -1,3 +1,4 @@
+import { ComponentProps } from 'react'
 import Image from 'next/image'
 import * as Dialog from '@radix-ui/react-dialog'
 
@@ -7,7 +8,7 @@ import { Book } from '@/@types/book'
 
 import { BookCardContainer, BookCardInfo } from './styles'
 
-interface BookCardProps {
+interface BookCardProps extends ComponentProps<typeof Dialog.Trigger> {
   book: Book
   rating?: number
   hasSummary?: boolean
@@ -17,9 +18,10 @@ export function BookCard({
   book,
   rating = -1,
   hasSummary = false,
+  ...props
 }: BookCardProps) {
   return (
-    <Dialog.Trigger asChild>
+    <Dialog.Trigger {...props}>
       <BookCardContainer hasSummary={hasSummary}>
         <div>
           <Image src={book.coverUrl} height={94} width={64} alt={book.name} />

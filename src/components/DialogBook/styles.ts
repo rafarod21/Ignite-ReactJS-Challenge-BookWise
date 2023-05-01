@@ -158,7 +158,7 @@ export const BookComment = styled('section', {
   },
 })
 
-export const CardNewComment = styled('div', {
+export const CardNewComment = styled('form', {
   padding: '$6',
   background: '$gray700',
   borderRadius: '$md',
@@ -175,51 +175,11 @@ export const CardNewComment = styled('div', {
     },
   },
 
-  '> div': {
-    width: '100%',
-    height: '10.25rem',
-    margin: '$6 0 $3',
-
-    background: '$gray800',
-    border: '1px solid $gray500',
-    borderRadius: '$sm',
-    padding: '$3 $5 $6 $5',
-
-    position: 'relative',
-
-    textarea: {
-      all: 'unset',
-
-      width: '100%',
-      height: '100%',
-      resize: 'none',
-
-      fontSize: '$sm',
-      color: '$gray200',
-
-      '&::placeholder': {
-        color: '$gray400',
-      },
-
-      '&::-webkit-scrollbar': {
-        display: 'none',
-      },
-    },
-
-    span: {
-      position: 'absolute',
-      right: '$1',
-      bottom: 0,
-
-      color: '$gray400',
-      fontSize: '$xs',
-    },
-  },
-
   footer: {
     display: 'flex',
     justifyContent: 'flex-end',
     gap: '$2',
+    marginTop: '$3',
 
     button: {
       padding: '$2',
@@ -243,6 +203,66 @@ export const CardNewComment = styled('div', {
         background: '$gray500',
       },
     },
+  },
+})
+
+export const FormTextArea = styled('div', {
+  width: '100%',
+  height: '10.25rem',
+  margin: '$6 0 0',
+
+  background: '$gray800',
+  border: '1px solid $gray500',
+  borderRadius: '$sm',
+  padding: '$3 $5 $6 $5',
+
+  position: 'relative',
+
+  textarea: {
+    all: 'unset',
+
+    width: '100%',
+    height: '100%',
+    resize: 'none',
+
+    fontSize: '$sm',
+    color: '$gray200',
+
+    '&::placeholder': {
+      color: '$gray400',
+    },
+
+    '&::-webkit-scrollbar': {
+      display: 'none',
+    },
+  },
+
+  span: {
+    position: 'absolute',
+    right: '$1',
+    bottom: 0,
+
+    color: '$gray400',
+    fontSize: '$xs',
+  },
+})
+
+export const FormError = styled('span', {
+  fontSize: '$xs',
+  color: '#F75A68',
+})
+
+export const NewRatingStars = styled('div', {
+  display: 'flex',
+  color: '$purple100',
+
+  'button:not(:last-child)': {
+    paddingRight: '$1',
+  },
+
+  svg: {
+    width: '1.75rem',
+    height: '1.75rem',
   },
 })
 

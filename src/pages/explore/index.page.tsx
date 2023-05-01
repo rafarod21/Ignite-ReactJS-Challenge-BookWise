@@ -22,28 +22,6 @@ import {
   Tag as TagComponent,
 } from './styles'
 
-const BOOK: Book = {
-  id: 'c8176d86-896a-4c21-9219-6bb28cccaa5f',
-  name: '14 Hábitos de Desenvolvedores Altamente Produtivos',
-  author: 'Zeno Rocha',
-  summary:
-    'Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis. Penatibus id vestibulum imperdiet a at imperdiet lectus leo. Sit porta eget nec vitae sit vulputate eget',
-  coverUrl:
-    '/images/books/14-habitos-de-desenvolvedores-altamente-produtivos.png',
-  totalPages: 160,
-  rate: 4,
-  categories: [
-    {
-      name: 'Educação',
-      id: 'f1a50507-0aa7-4245-8a5c-0d0de14e9d6d',
-    },
-    {
-      name: 'Programação',
-      id: 'c9f22067-4978-4a24-84a1-7d37f343dfc2',
-    },
-  ],
-}
-
 interface ExploreProps {
   books: Book[]
 }
@@ -80,45 +58,51 @@ export default function Explore({ books }: ExploreProps) {
 
   return (
     <Layout>
-      <Dialog.Root>
-        <ExploreContainer>
-          <ExploreHeader>
-            <h1>
-              <Binoculars /> Explorar
-            </h1>
-            <SearchBookOrAuthor>
-              <input type="text" placeholder="Buscar livro ou autor" />
-              <MagnifyingGlass />
-            </SearchBookOrAuthor>
-          </ExploreHeader>
-          <BooksTags>
+      <ExploreContainer>
+        <ExploreHeader>
+          <h1>
+            <Binoculars /> Explorar
+          </h1>
+          <SearchBookOrAuthor>
+            <input type="text" placeholder="Buscar livro ou autor" />
+            <MagnifyingGlass />
+          </SearchBookOrAuthor>
+        </ExploreHeader>
+        <BooksTags>
+          <TagComponent
+            onClick={() => setSelectedTags([])}
+            selected={selectedTags.length === 0}
+          >
+            Tudo
+          </TagComponent>
+          {tags.map((tag) => (
             <TagComponent
-              onClick={() => setSelectedTags([])}
-              selected={selectedTags.length === 0}
+              key={tag}
+              onClick={() => handleToogleSelectedTag(tag)}
+              selected={selectedTags.includes(tag)}
             >
-              Tudo
+              {tag}
             </TagComponent>
-            {tags.map((tag) => (
-              <TagComponent
-                key={tag}
-                onClick={() => handleToogleSelectedTag(tag)}
-                selected={selectedTags.includes(tag)}
-              >
-                {tag}
-              </TagComponent>
-            ))}
-          </BooksTags>
-          <BooksList>
-            {selectedTags.length
-              ? filteredBooksByTags.map((book) => (
-                  <BookCard key={book.id} book={book} />
-                ))
-              : books.map((book) => <BookCard key={book.id} book={book} />)}
-          </BooksList>
-        </ExploreContainer>
+          ))}
+        </BooksTags>
+        <BooksList>
+          {selectedTags.length
+            ? filteredBooksByTags.map((book) => (
+                <Dialog.Root key={book.id}>
+                  <BookCard book={book} />
 
-        <DialogBook book={BOOK} />
-      </Dialog.Root>
+                  <DialogBook book={book} />
+                </Dialog.Root>
+              ))
+            : books.map((book) => (
+                <Dialog.Root key={book.id}>
+                  <BookCard key={book.id} book={book} />
+
+                  <DialogBook book={book} />
+                </Dialog.Root>
+              ))}
+        </BooksList>
+      </ExploreContainer>
     </Layout>
   )
 }

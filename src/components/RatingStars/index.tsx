@@ -3,7 +3,7 @@ import { RatingStarsContainer } from './styles'
 
 interface RatingStarsProps {
   rating: number
-  size?: 'sm' | 'md' | 'lg'
+  size?: 'sm' | 'md'
 }
 
 export function RatingStars({ rating, size = 'sm' }: RatingStarsProps) {

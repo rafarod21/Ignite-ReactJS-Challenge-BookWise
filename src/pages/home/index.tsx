@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 import { CaretRight, ChartLineUp } from '@phosphor-icons/react'
@@ -20,28 +21,6 @@ import {
   HomePopularBooks,
   HomeRecentReviews,
 } from './styles'
-
-const BOOK: Book = {
-  id: 'c8176d86-896a-4c21-9219-6bb28cccaa5f',
-  name: '14 Hábitos de Desenvolvedores Altamente Produtivos',
-  author: 'Zeno Rocha',
-  summary:
-    'Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis. Penatibus id vestibulum imperdiet a at imperdiet lectus leo. Sit porta eget nec vitae sit vulputate eget',
-  coverUrl:
-    '/images/books/14-habitos-de-desenvolvedores-altamente-produtivos.png',
-  totalPages: 160,
-  rate: 4,
-  categories: [
-    {
-      name: 'Educação',
-      id: 'f1a50507-0aa7-4245-8a5c-0d0de14e9d6d',
-    },
-    {
-      name: 'Programação',
-      id: 'c9f22067-4978-4a24-84a1-7d37f343dfc2',
-    },
-  ],
-}
 
 interface HomeProps {
   recentsReviews: {
@@ -69,69 +48,78 @@ export default function Home({
 }: HomeProps) {
   const { data: session } = useSession()
 
+  const [chosenBook, setChosenBook] = useState<Book | null>(null)
+
+  function handleModalOpening(book: Book) {
+    setChosenBook(book)
+  }
+
   return (
     <Layout>
-      <Dialog.Root>
-        <HomeContainer>
-          <HomeHeader>
-            <h1>
-              <ChartLineUp /> Início
-            </h1>
-          </HomeHeader>
-          <HomeContent>
-            {session && (
-              <HomeLastRead>
-                <div>
-                  Sua última leitura
-                  {lastReading && (
-                    <Link href={`/profile/${session.user.id}`}>
-                      Ver todas <CaretRight weight="bold" />
-                    </Link>
-                  )}
-                </div>
-                {lastReading ? (
-                  <BookCardLastReading
-                    book={lastReading.book}
-                    rating={lastReading.rating}
-                  />
-                ) : (
-                  'Você ainda não leu nenhum livro...'
-                )}
-              </HomeLastRead>
-            )}
-            <HomeRecentReviews>
-              <span>Avalizações mais recentes</span>
+      <HomeContainer>
+        <HomeHeader>
+          <h1>
+            <ChartLineUp /> Início
+          </h1>
+        </HomeHeader>
+        <HomeContent>
+          {session && (
+            <HomeLastRead>
               <div>
-                {recentsReviews.map((review, index) => (
-                  <BookCardRated
-                    key={`${review.rating.createdAtAsString}-${index}`}
-                    book={review.book}
-                    user={review.user}
-                    rating={review.rating}
-                  />
-                ))}
-              </div>
-            </HomeRecentReviews>
-            <HomePopularBooks>
-              <div>
-                <div>
-                  Livros populares
-                  <Link href="/explore">
-                    Ver todos <CaretRight weight="bold" />
+                Sua última leitura
+                {lastReading && (
+                  <Link href={`/profile/${session.user.id}`}>
+                    Ver todas <CaretRight weight="bold" />
                   </Link>
-                </div>
-                <div>
-                  {popularBooks.map((book) => (
-                    <BookCard key={book.id} book={book} />
-                  ))}
-                </div>
+                )}
               </div>
-            </HomePopularBooks>
-          </HomeContent>
-        </HomeContainer>
-
-        <DialogBook book={BOOK} />
-      </Dialog.Root>
+              {lastReading ? (
+                <BookCardLastReading
+                  book={lastReading.book}
+                  rating={lastReading.rating}
+                />
+              ) : (
+                'Você ainda não leu nenhum livro...'
+              )}
+            </HomeLastRead>
+          )}
+          <HomeRecentReviews>
+            <span>Avalizações mais recentes</span>
+            <div>
+              {recentsReviews.map((review, index) => (
+                <BookCardRated
+                  key={`${review.rating.createdAtAsString}-${index}`}
+                  book={review.book}
+                  user={review.user}
+                  rating={review.rating}
+                />
+              ))}
+            </div>
+          </HomeRecentReviews>
+          <HomePopularBooks>
+            <div>
+              <div>
+                Livros populares
+                <Link href="/explore">
+                  Ver todos <CaretRight weight="bold" />
+                </Link>
+              </div>
+              <div>
+                <Dialog.Root>
+                  {popularBooks.map((book, index) => (
+                    <BookCard
+                      key={book.id}
+                      book={book}
+                      onClick={() => handleModalOpening(book)}
+                    />
+                  ))}
+                  <DialogBook book={chosenBook} />
+                </Dialog.Root>
+              </div>
+            </div>
+          </HomePopularBooks>
+        </HomeContent>
+      </HomeContainer>
     </Layout>
   )
 }
